@@ -339,7 +339,7 @@ body {
 /* Custom Scrollbar */
 .scrollbar-custom {
   scrollbar-width: auto;
-  scrollbar-color: #5c6166 #e4e2e2;
+  scrollbar-color: #d8e0e6 #e4e2e2;
 }
 
 .scrollbar-custom::-webkit-scrollbar {
@@ -348,7 +348,7 @@ body {
 }
 
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: #5c6166;
+  background-color: #d8e0e6;
   border-radius: 14px;
 }
 

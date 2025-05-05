@@ -35,7 +35,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${quicksand.variable} ${quicksand.className}`}>
+      <body
+        className={`h-[100vh] ${quicksand.variable} ${quicksand.className}`}
+      >
         {children}
       </body>
     </html>

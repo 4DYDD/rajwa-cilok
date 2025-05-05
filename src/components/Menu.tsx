@@ -6,9 +6,67 @@ import useCartStore from "@/app/hooks/useCartStore";
 import { menuItems } from "@/app/data/menuItems";
 import { formatRupiah } from "@/app/utils/formatRupiah";
 
+const MenuHeader = () => (
+  <h1 className="text-2xl font-extrabold text-center text-black flex items-center gap-4 mx-auto clicked transall mt-24 mb-5 flexc">
+    <i className="fas fa-utensil-spoon transform scale-x-[-1]" />
+    <span>Menu</span>
+    <i className="fas fa-spoon" />
+  </h1>
+);
+
+const MenuItem = ({ item, handleAddToCart }: any) => {
+  const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
+
+  return (
+    <div
+      key={item.id}
+      className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transform clicked transall h-full"
+    >
+      <Image
+        src={item.image || `https://picsum.photos/300/300?random=${item.id}`}
+        alt={item.name}
+        width={500}
+        height={500}
+        className="w-full h-[150px] object-cover"
+      />
+      <div className="p-4 flex flex-col justify-between flex-grow">
+        <h2 className="text-md font-bold text-gray-800 mb-2">
+          {truncateText(item.name, 30)}
+        </h2>
+        <button
+          className="bg-green-500 text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc !justify-start font-bold"
+          onClick={(event) => handleAddToCart(event, item)}
+        >
+          <i className="fas fa-shopping-basket mr-2" />
+          <span>{formatRupiah(item.price)}</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const MenuGrid = ({ items, handleAddToCart }: any) => {
+  const textSizeInPx = 13; // Ukuran teks dalam pixel
+  const textSizeInEm = textSizeInPx / 16; // Konversi ke em (1em = 16px)
+
+  return (
+    <div
+      className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-2"
+      style={{ fontSize: `${textSizeInEm}em` }}
+    >
+      {items.map((item: any) => (
+        <MenuItem key={item.id} item={item} handleAddToCart={handleAddToCart} />
+      ))}
+    </div>
+  );
+};
+
 const Menu = () => {
-  const { items, addItem, removeItem, updateQuantity, clearCart } =
-    useCartStore();
+  const { items, addItem, updateQuantity } = useCartStore();
 
   const handleAddToCart = (event: any, item: any) => {
     const isItemExist = items.find((cartItem: any) => cartItem.id === item.id);
@@ -19,70 +77,15 @@ const Menu = () => {
     }
   };
 
-  const handleRemoveFromCart = (event: any, item: any) => {
-    const isItemExist = items.find((cartItem: any) => cartItem.id === item.id);
-    if (isItemExist) removeItem(item.id);
-  };
-
   useEffect(() => {
     if (items.length > 0) console.log(items);
   }, [items]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5 mt-16">
-      <h1 className="text-2xl font-extrabold text-center text-black flexc gap-4 mx-auto transform cursor-pointer hover:scale-95 transall">
-        <i
-          className="fas fa-utensil-spoon transall"
-          style={{ transform: "scaleX(-1)" }}
-        />
-        <span>Menu</span>
-        <i className="fas fa-spoon" />
-      </h1>
-      {menuItems.map((item) => (
-        <div
-          key={item.id}
-          className="flex flex-col p-7 mb-2 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white rounded-lg shadow-md"
-        >
-          <Image
-            src={
-              item.image || `https://picsum.photos/500/300?random=${item.id}`
-            }
-            alt={item.name}
-            width={500}
-            height={300}
-            className="rounded-t-lg"
-          />
-          <div className="flex flex-col p-4">
-            <h2 className="text-2xl font-bold">{item.name}</h2>
-            <p className="text-lg font-semibold">{formatRupiah(item.price)}</p>
-            <div className="flexc !justify-end pe-1">
-              <span className="text-lg font-semibold min-w-10 h-10 flexc">
-                {items.find((cartItem: any) => cartItem.id === item.id)
-                  ? items.find((cartItem: any) => cartItem.id === item.id)
-                      ?.quantity
-                  : ""}
-              </span>
-            </div>
-            <div className="flexc !justify-end mt-4 gap-3">
-              {items.find((cartItem: any) => cartItem.id === item.id) && (
-                <button
-                  className="block clicked transall !select-none self-end w-28 bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow"
-                  onClick={(event: any) => handleRemoveFromCart(event, item)}
-                >
-                  Hapus
-                </button>
-              )}
-              <button
-                className="block clicked transall !select-none self-end w-28 bg-green-500 text-white font-bold py-2 px-4 rounded-lg shadow"
-                onClick={(event: any) => handleAddToCart(event, item)}
-              >
-                Tambah
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      <MenuHeader />
+      <MenuGrid items={menuItems} handleAddToCart={handleAddToCart} />
+    </>
   );
 };
 

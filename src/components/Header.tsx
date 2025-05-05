@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import useCartOpenStore from "@/app/hooks/useCartOpenStore";
+import Cart from "./Cart";
 
 const Header = () => {
+  const { isCartOpen, setCartOpen } = useCartOpenStore();
+
   const handleButtonClick = (event: any) => {
     event.preventDefault();
-    alert("Button clicked!");
+    setCartOpen(!isCartOpen);
   };
 
   return (
@@ -21,13 +25,16 @@ const Header = () => {
               className="block clicked transall"
               onClick={handleButtonClick}
             >
-              <span className="flex items-center">
-                <i className="fas fa-shopping-cart mr-2 text-xl"></i>
+              <span className="flexc font-semibold border border-gray-200 p-3 rounded-lg text-gray-800 hover:text-black text-lg">
+                <span className="leading-none h-[15px] flexc">
+                  <i className="fas fa-shopping-basket"></i>
+                </span>
               </span>
             </button>
           </li>
         </ul>
       </nav>
+      {isCartOpen && <Cart />}
     </div>
   );
 };
