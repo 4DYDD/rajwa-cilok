@@ -36,13 +36,13 @@ const Cart = () => {
       onClick={handleCloseCart}
     >
       <div
-        className="m-4 rounded-t-xl shadow-md w-96 max-h-[90vh] overflow-hidden"
+        className="m-2 rounded-t-xl shadow-md w-96 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <CartHeader handleCloseCart={handleCloseCart} />
 
         {items.length > 0 ? (
-          <ul className="pt-5 max-h-[500px] overflow-y-auto scrollbar-custom bg-white pb-0">
+          <ul className="pt-5 max-h-[450px] overflow-y-auto scrollbar-custom bg-red-500 w-full">
             {items.map((item) => (
               <CartItem
                 key={item.id}

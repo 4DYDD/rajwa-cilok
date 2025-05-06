@@ -143,10 +143,10 @@ const CartItem = ({
 }) => (
   <li
     key={item.id}
-    className={`mb-5 flex items-center justify-between text-[16px] bg-gray-100 overflow-hidden rounded-lg p-3 ${className}`}
+    className={`flex items-center justify-between text-[16px] bg-gray-50 border border-gray-200 overflow-hidden px-2 py-6 ${className}`}
   >
     <div className="flexcc gap-2 h-[160px] w-full !items-start">
-      <div className="flexc gap-2 w-full h-full !items-start p-1">
+      <div className="flexc gap-2 w-full h-full !items-start p-1 mb-2">
         <CartItemImage item={item} />
         <div className="text-[12px] h-full w-full">
           <CartItemLabels item={item} />
@@ -154,9 +154,21 @@ const CartItem = ({
       </div>
 
       <div className="flexc w-full !justify-between py-1 px-2">
-        <span className="text-[1.1em] font-bold">
-          {formatRupiah(item.totalPrice)}
-        </span>
+        <div className="flex flex-col">
+          <div className="flex text-[0.8em] text-gray-600">
+            <span className="w-[50px]">Harga</span>
+            <span className="w-[10px] text-center mx-1">:</span>
+            <span>{formatRupiah(item.price)}</span>
+          </div>
+          <div className="flexc text-[0.9em] font-bold">
+            <span className="w-[50px]">Total</span>
+            <span className="w-[10px] text-center mx-1">:</span>
+            <span>{formatRupiah(item.totalPrice)}</span>
+            <span className="text-[0.8em] text-gray-500 ml-2 w-[100px]">
+              {`(${item.price} x ${item.quantity})`}
+            </span>
+          </div>
+        </div>
         <CartItemActions
           item={item}
           updateQuantity={updateQuantity}
