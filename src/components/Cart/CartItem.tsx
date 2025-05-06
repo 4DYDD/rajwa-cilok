@@ -46,12 +46,12 @@ const CartItemLabels = ({
         className="ps-3 pe-5 py-1.5 text-[0.5em] bg-orange-500 font-bold gap-2 flexc"
         style={{
           color: "white",
-          WebkitTextStroke: "0.3px white",
+          WebkitTextStroke: "0.2px white",
         }}
       >
         <i
           style={{
-            WebkitTextStroke: "1.5px white",
+            WebkitTextStroke: "1px white",
           }}
           className="leading-none fas fa-fire text-transparent"
         ></i>

@@ -1,6 +1,16 @@
-export const menuItems = [
+export interface MenuItemInterface {
+  id: string;
+  name: string;
+  price: number;
+  category?: "" | "terlaris" | "terbaru"; // Properti opsional untuk kategori
+  image?: string; // Properti opsional untuk gambar
+  ongkir?: "" | "free"; // Properti opsional untuk ongkir
+  description?: string; // Properti opsional untuk deskripsi
+}
+
+export const menuItems: Array<MenuItemInterface> = [
   {
-    id: 1,
+    id: "a1b2c3d4",
     name: "Cilok Isi Telur",
     price: 5000,
     image:
@@ -11,7 +21,7 @@ export const menuItems = [
       "Cilok Isi Telur adalah camilan khas Indonesia yang terbuat dari adonan tepung tapioka dengan isian telur di dalamnya. Teksturnya kenyal dengan rasa gurih yang cocok dinikmati kapan saja. Hidangan ini sangat populer dan menjadi favorit banyak orang karena kelezatannya.",
   },
   {
-    id: 2,
+    id: "e5f6g7h8",
     name: "Tacisa (Tahu Cilok Sayur)",
     price: 6000,
     image:
@@ -22,7 +32,7 @@ export const menuItems = [
       "Tacisa adalah perpaduan unik antara tahu, cilok, dan sayuran yang memberikan rasa lezat dan sehat. Dengan tekstur lembut dari tahu dan kenyalnya cilok, hidangan ini cocok untuk Anda yang mencari camilan bergizi namun tetap nikmat.",
   },
   {
-    id: 3,
+    id: "i9j0k1l2",
     name: "Pentol Ayam",
     price: 7000,
     image:
@@ -33,7 +43,7 @@ export const menuItems = [
       "Pentol Ayam adalah bola-bola daging ayam yang lembut dan gurih, cocok untuk dinikmati sebagai camilan atau pelengkap makanan. Hidangan ini kaya akan rasa dan menjadi salah satu menu favorit pelanggan.",
   },
   {
-    id: 4,
+    id: "m3n4o5p6",
     name: "Tahu Walit",
     price: 8000,
     image:
@@ -42,15 +52,5 @@ export const menuItems = [
     ongkir: "free",
     description:
       "Tahu Walit adalah camilan berbahan dasar tahu yang digoreng hingga renyah di luar namun tetap lembut di dalam. Rasanya yang gurih dan teksturnya yang unik membuatnya menjadi pilihan yang sempurna untuk menemani waktu santai Anda.",
-  },
-  {
-    id: 5,
-    name: "awerawhe raweri uahweiruw rawer erauweryg awera weryaweyr aywegrauwery aweuryawer",
-    price: 9000,
-    image: "",
-    category: "unik",
-    ongkir: "free",
-    description:
-      "Item ini memiliki nama yang unik dan menarik perhatian. Cocok untuk Anda yang ingin mencoba sesuatu yang berbeda.",
   },
 ];

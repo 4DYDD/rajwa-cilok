@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import useCartStore from "@/app/hooks/useCartStore";
-import { menuItems } from "@/app/data/menuItems";
 import { formatRupiah } from "@/app/utils/formatRupiah";
+import { MenuItemInterface } from "@/app/data/menuItems";
 
 const MenuHeader = () => (
   <h1 className="text-2xl font-extrabold text-center text-black flex items-center gap-4 mx-auto clicked transall mt-24 mb-5 flexc">
@@ -33,13 +33,16 @@ const MenuItem = ({ item, handleAddToCart }: any) => {
       </div>
 
       <div className="px-5">
-        <h3 className="text-lg text-gray-600 font-bold mb-1 text-left">
+        <h3 className="text-[20px] text-gray-600 font-bold text-left">
           {truncateText(item.name, 30)}
         </h3>
-        <div className="text-gray-900 font-bold text-2xl mb-2 text-left">
-          {formatRupiah(item.price)}
+        <div className="text-gray-900 font-bold text-2xl mb-4 text-left flexc !items-end !justify-start self-start">
+          <span className="text-lg mr-0.5">Rp</span>
+          <span className="">
+            {formatRupiah(item.price).split("Rp")[1].trim()}
+          </span>
         </div>
-        <div className="text-gray-500 text-sm mb-4 text-left h-[40px]">
+        <div className="text-gray-500 text-sm mb-6 text-left h-[40px]">
           {item.description.length > 130
             ? `${item.description.slice(0, 130)}...`
             : item.description}
@@ -47,50 +50,34 @@ const MenuItem = ({ item, handleAddToCart }: any) => {
       </div>
 
       <button
-        className="bg-green-500 h-[40px] w-[50px] text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc font-bold self-end m-5"
+        className="bg-green-500 h-[50px] w-[60px] text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc font-bold self-end m-5"
         onClick={(event) => handleAddToCart(event, item)}
       >
-        <i className="fas fa-shopping-basket" />
+        <i className="fas fa-shopping-basket text-[1.5em]" />
       </button>
     </div>
-
-    // <div
-    //   key={item.id}
-    //   className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transform clicked transall h-full"
-    // >
-    //   <Image
-    //     src={item.image || `https://picsum.photos/300/300?random=${item.id}`}
-    //     alt={item.name}
-    //     width={500}
-    //     height={500}
-    //     className="w-full h-[150px] object-cover"
-    //   />
-    //   <div className="p-4 flex flex-col justify-between flex-grow">
-    //     <h2 className="text-md font-bold text-gray-800 mb-2">
-    //       {truncateText(item.name, 30)}
-    //     </h2>
-    //     <button
-    //       className="bg-green-500 text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc !justify-start font-bold"
-    //       onClick={(event) => handleAddToCart(event, item)}
-    //     >
-    //       <i className="fas fa-shopping-basket mr-2" />
-    //       <span>{formatRupiah(item.price)}</span>
-    //     </button>
-    //   </div>
-    // </div>
   );
 };
 
-const MenuGrid = ({ items, handleAddToCart }: any) => {
+const MenuGrid = ({
+  menuItems,
+  handleAddToCart,
+}: {
+  menuItems: Array<MenuItemInterface>;
+  handleAddToCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    item: any
+  ) => void;
+}) => {
   const textSizeInPx = 13; // Ukuran teks dalam pixel
   const textSizeInEm = textSizeInPx / 16; // Konversi ke em (1em = 16px)
 
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2.5"
       style={{ fontSize: `${textSizeInEm}em` }}
     >
-      {items.map((item: any) => (
+      {menuItems.map((item) => (
         <MenuItem key={item.id} item={item} handleAddToCart={handleAddToCart} />
       ))}
     </div>
@@ -99,6 +86,7 @@ const MenuGrid = ({ items, handleAddToCart }: any) => {
 
 const Menu = () => {
   const { items, addItem, updateQuantity } = useCartStore();
+  const [menuItems, setMenuItems] = useState<Array<MenuItemInterface>>([]);
 
   const handleAddToCart = (event: any, item: any) => {
     const isItemExist = items.find((cartItem: any) => cartItem.id === item.id);
@@ -110,13 +98,28 @@ const Menu = () => {
   };
 
   useEffect(() => {
-    if (items.length > 0) console.log(items);
-  }, [items]);
+    const fetchMenuItems = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/menu`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch menu items");
+        }
+        const data = await response.json();
+        setMenuItems(data.data);
+      } catch (error) {
+        console.error("Error fetching menu items:", error);
+      }
+    };
+
+    fetchMenuItems();
+  }, []);
 
   return (
     <>
       <MenuHeader />
-      <MenuGrid items={menuItems} handleAddToCart={handleAddToCart} />
+      <MenuGrid menuItems={menuItems} handleAddToCart={handleAddToCart} />
     </>
   );
 };
