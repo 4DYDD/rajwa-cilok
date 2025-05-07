@@ -4,9 +4,11 @@ import Link from "next/link";
 import useCartOpenStore from "@/app/hooks/useCartOpenStore";
 import Cart from "./Cart";
 import Image from "next/image";
+import useCartStore from "@/app/hooks/useCartStore";
 
-const Header = () => {
+const Header: React.FC = () => {
   const { isCartOpen, setCartOpen } = useCartOpenStore();
+  const { items } = useCartStore();
 
   const handleButtonClick = (event: any) => {
     event.preventDefault();
@@ -32,18 +34,28 @@ const Header = () => {
           </div>
         </Link>
         <ul className="flex items-center space-x-4">
-          <li>
+          <li className="rounded-lg overflow-hidden border border-gray-200 relative clicked transall text-gray-700 active:text-black">
             <button
               type="button"
-              className="clicked transall h-[50px] w-[60px] flexc font-semibold border border-gray-200 p-3 rounded-lg"
+              className={`h-[50px] w-[60px] flexc font-semibold p-3 relative`}
               onClick={handleButtonClick}
             >
-              <span className="flexc font-semibold border-gray-200 text-gray-700 hover:text-black text-lg">
+              <span className="flexc font-semibold text-lg">
                 <span className="leading-none h-[15px] flexc">
-                  <i className="fas fa-shopping-basket text-[1.2em]"></i>
+                  <i
+                    className={`fas fa-shopping-basket text-[1.2em] ${
+                      items.length > 0 ? "animate-bounceku" : ""
+                    }`}
+                  />
                 </span>
-                {/* tambahkan text jika di desktop */}
               </span>
+              {/* Lingkaran kecil dengan efek pulse dan jumlah total quantity */}
+              {items.length > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 h-5 w-5 bg-orange-400 rounded-lg px-3 flexc text-white text-[10px] font-bold animate-pulseku">
+                  {items.reduce((total, item) => total + item.quantity, 0)}
+                  <span className="absolute h-[80%] w-[80%] rounded-lg px-1.5 bg-orange-400 opacity-50 animate-pingku"></span>
+                </span>
+              )}
             </button>
           </li>
         </ul>

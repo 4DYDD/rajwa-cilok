@@ -19,7 +19,7 @@ const QuantityField: React.FC<QuantityFieldProps> = ({
     const value = e.target.value.trim();
     if (value === "") {
       const confirmDelete = window.confirm(
-        "Quantity is 0. Do you want to remove this item from the cart?"
+        "Menghapus digit terakhir akan membuat jumlah menjadi 0. Apakah Anda yakin ingin menghapus item ini dari keranjang?"
       );
       if (!confirmDelete) {
         e.target.value = quantity.toString(); // Reset to current quantity
@@ -33,7 +33,7 @@ const QuantityField: React.FC<QuantityFieldProps> = ({
       const newQuantity = parseInt(value, 10);
       if (newQuantity === 0) {
         const confirmDelete = window.confirm(
-          "Quantity is 0. Do you want to remove this item from the cart?"
+          "Jika Anda mengubah jumlah item menjadi 0, item akan dihapus. Apakah Anda yakin ingin menghapus item ini dari keranjang?"
         );
         if (!confirmDelete) {
           e.target.value = quantity.toString(); // Reset to current quantity
@@ -58,7 +58,7 @@ const QuantityField: React.FC<QuantityFieldProps> = ({
   return (
     <form onSubmit={handleSubmit} className={` ${className}`}>
       <input
-        className="size-full text-center"
+        className="size-full text-center bg-white overflow-hidden border border-gray-800 rounded transall"
         id={`quantity-${itemId}`}
         type="text"
         inputMode="numeric"

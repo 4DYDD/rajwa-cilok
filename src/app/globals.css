@@ -148,7 +148,7 @@ body {
   }
 }
 .animate-pingku {
-  animation: pingku 0.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: pingku 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 @keyframes pulseku {
   50% {
@@ -156,7 +156,7 @@ body {
   }
 }
 .animate-pulseku {
-  animation: pulseku 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulseku 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 @keyframes bounceku {
   0%,
@@ -339,7 +339,7 @@ body {
 /* Custom Scrollbar */
 .scrollbar-custom {
   scrollbar-width: auto;
-  scrollbar-color: #d8e0e6 #e4e2e2;
+  scrollbar-color: #a0aec0 #2d3748;
 }
 
 .scrollbar-custom::-webkit-scrollbar {
@@ -348,11 +348,11 @@ body {
 }
 
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: #d8e0e6;
+  background-color: #a0aec0;
   border-radius: 14px;
 }
 
 .scrollbar-custom::-webkit-scrollbar-track {
-  background-color: #e4e2e2;
+  background-color: #2d3748;
   border-radius: 14px;
 }

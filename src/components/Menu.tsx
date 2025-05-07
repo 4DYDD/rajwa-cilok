@@ -1,39 +1,79 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import useCartStore from "@/app/hooks/useCartStore";
 import { formatRupiah } from "@/app/utils/formatRupiah";
 import { MenuItemInterface } from "@/app/data/menuItems";
+import { useState } from "react";
 
 const MenuHeader = () => (
-  <h1 className="text-2xl font-extrabold text-center text-black flex items-center gap-4 mx-auto clicked transall mt-24 mb-5 flexc">
-    <i className="fas fa-utensil-spoon transform scale-x-[-1]" />
-    <span>Menu</span>
-    <i className="fas fa-spoon" />
-  </h1>
+  <header className="mt-20 pt-5 mb-5 relative">
+    <div className="flexc relative">
+      <Image
+        alt={`cilok`}
+        width={512}
+        height={512}
+        src={`/images/food-stall.png`}
+        className="w-32 h-32"
+      />
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="flex items-center gap-14 pt-4">
+          <Image
+            alt={`cilok`}
+            width={512}
+            height={512}
+            src={`/images/meat-ball.png`}
+            className="w-16 h-16"
+          />
+
+          <Image
+            alt={`cil ok`}
+            width={512}
+            height={512}
+            src={`/images/meat-ball.png`}
+            className="w-16 h-16 scale-x-[-1]"
+          />
+        </div>
+        <h1 className="absolute top-[65%] text-white text-xl font-bold">
+          Menu
+        </h1>
+      </div>
+    </div>
+    <div className="w-48 h-2 transcenter !top-[92%] border-[4px] border-black mx-auto rounded-t-full"></div>
+  </header>
 );
 
 const MenuItem = ({ item, handleAddToCart }: any) => {
+  const { items } = useCartStore();
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength
       ? text.substring(0, maxLength) + "..."
       : text;
   };
 
+  const cartItem = items.find((cartItem: any) => cartItem.id === item.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+
   return (
-    <div className="w-full max-w-[360px] rounded-lg overflow-hidden shadow shadow-gray-300 bg-white flex flex-col mx-auto">
-      <div className="size-[360px] relative mb-3 self-center">
-        <Image
-          src={item.image || `https://picsum.photos/300/300?random=${item.id}`} // Fallback image
-          alt={item.name}
-          layout="fill"
-          objectFit="cover"
-        />
+    <div className="w-full max-w-[340px] rounded-lg overflow-hidden shadow shadow-gray-300 bg-white flex flex-col mx-auto">
+      <div className="size-[340px] relative mb-5 bg-red-500 self-center">
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={item.name}
+            width={300}
+            height={300}
+            className="object-cover size-full"
+          />
+        ) : (
+          <div className="w-full h-[300px] bg-gray-200 animate-pulse" />
+        )}
       </div>
 
       <div className="px-5">
-        <h3 className="text-[20px] text-gray-600 font-bold text-left">
+        <h3 className="text-[18px] mb-1 text-gray-600 font-bold text-left">
           {truncateText(item.name, 30)}
         </h3>
         <div className="text-gray-900 font-bold text-2xl mb-4 text-left flexc !items-end !justify-start self-start">
@@ -42,18 +82,41 @@ const MenuItem = ({ item, handleAddToCart }: any) => {
             {formatRupiah(item.price).split("Rp")[1].trim()}
           </span>
         </div>
-        <div className="text-gray-500 text-sm mb-6 text-left h-[40px]">
-          {item.description.length > 130
-            ? `${item.description.slice(0, 130)}...`
+        <div className="text-gray-500 text-sm mb-6 text-left min-h-[30px]">
+          {showFullDescription
+            ? item.description
+            : item.description.length > 100
+            ? `${item.description.slice(0, 100)}...`
             : item.description}
+          {item.description.length > 100 && (
+            <button
+              className="text-gray-400 underline underline-offset-2 ml-2 transall text-[12px]"
+              onClick={() => setShowFullDescription(!showFullDescription)}
+            >
+              {showFullDescription ? "Sembunyikan" : "Selengkapnya"}
+            </button>
+          )}
         </div>
       </div>
 
       <button
-        className="bg-green-500 h-[50px] w-[60px] text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc font-bold self-end m-5"
+        className="bg-green-500 h-[50px] w-[60px] text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc font-bold self-end m-5 relative"
         onClick={(event) => handleAddToCart(event, item)}
       >
         <i className="fas fa-shopping-basket text-[1.5em]" />
+        {quantity > 0 && (
+          <span
+            className="absolute top-0.5 right-0.5 bg-teal-700 text-white font-bold rounded-md h-4 w-4 px-2 flexc"
+            style={{
+              fontSize: `${Math.max(
+                10 - Math.floor(Math.log10(quantity)) * 2,
+                6
+              )}px`,
+            }}
+          >
+            {quantity}
+          </span>
+        )}
       </button>
     </div>
   );
@@ -74,7 +137,7 @@ const MenuGrid = ({
 
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2.5"
+      className="bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-4"
       style={{ fontSize: `${textSizeInEm}em` }}
     >
       {menuItems.map((item) => (
@@ -84,9 +147,71 @@ const MenuGrid = ({
   );
 };
 
-const Menu = () => {
+const Footer = () => (
+  <footer className="bg-gray-900 text-white py-4 text-center text-xs">
+    <h1 className="text-base font-bold mb-5 pb-1 border border-b border-b-white border-transparent w-24 m-auto">
+      Referensi
+    </h1>
+    <div className="min-h-[100px] text-left px-5">
+      <h2 className="text-sm font-semibold leading-none">Ikon oleh Flaticon</h2>
+
+      {[
+        {
+          title: "Flat Icons Design :",
+          items: [
+            {
+              href: "https://www.flaticon.com/free-icons/food-stall",
+              title: "food-stall icons",
+              text: "Food-stall icons created by Flat Icons Design",
+            },
+          ],
+        },
+        {
+          title: "Vector Stall :",
+          items: [
+            {
+              href: "https://www.flaticon.com/free-icons/stickman",
+              title: "stickman icons",
+              text: "Stickman icons created by Vector Stall - Flaticon",
+            },
+          ],
+        },
+        {
+          title: "doraclub :",
+          items: [
+            {
+              href: "https://www.flaticon.com/free-icons/meat-ball",
+              title: "meat ball icons",
+              text: "Meat ball icons created by doraclub - Flaticon",
+            },
+          ],
+        },
+      ].map((section, index) => (
+        <div key={index}>
+          <h3 className="ps-2 mt-4">{section.title}</h3>
+          <div className="mb-2 ps-4">
+            <ul className="list-decimal list-inside">
+              {section.items.map((item, idx) => (
+                <li key={idx}>
+                  <a
+                    href={item.href}
+                    title={item.title}
+                    className="ps-0.5 underline underline-offset-4 hover:text-gray-400"
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </footer>
+);
+
+const Menu = ({ menuItems }: { menuItems: Array<MenuItemInterface> }) => {
   const { items, addItem, updateQuantity } = useCartStore();
-  const [menuItems, setMenuItems] = useState<Array<MenuItemInterface>>([]);
 
   const handleAddToCart = (event: any, item: any) => {
     const isItemExist = items.find((cartItem: any) => cartItem.id === item.id);
@@ -97,29 +222,11 @@ const Menu = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchMenuItems = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/menu`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch menu items");
-        }
-        const data = await response.json();
-        setMenuItems(data.data);
-      } catch (error) {
-        console.error("Error fetching menu items:", error);
-      }
-    };
-
-    fetchMenuItems();
-  }, []);
-
   return (
     <>
       <MenuHeader />
       <MenuGrid menuItems={menuItems} handleAddToCart={handleAddToCart} />
+      <Footer />
     </>
   );
 };

@@ -13,7 +13,8 @@ export interface CartItemInterface {
 }
 
 interface CartState {
-  items: CartItemInterface[];
+  items: Array<CartItemInterface>;
+  totalCartPrice: number; // Properti untuk menyimpan total harga semua item di keranjang
   addItem: (item: CartItemInterface) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -22,24 +23,42 @@ interface CartState {
 
 const useCartStore = create<CartState>()((set) => ({
   items: [],
+  totalCartPrice: 0,
   addItem: (item: CartItemInterface) =>
-    set((state) => ({
-      items: [
+    set((state) => {
+      const updatedItems = [
         ...state.items,
-        { ...item, totalPrice: item.price * item.quantity }, // Hitung total harga saat item ditambahkan
-      ],
-    })),
+        { ...item, totalPrice: item.price * item.quantity },
+      ];
+      const updatedTotalCartPrice = updatedItems.reduce(
+        (total, currentItem) => total + currentItem.totalPrice,
+        0
+      );
+      return { items: updatedItems, totalCartPrice: updatedTotalCartPrice };
+    }),
   removeItem: (id: string) =>
-    set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
+    set((state) => {
+      const updatedItems = state.items.filter((item) => item.id !== id);
+      const updatedTotalCartPrice = updatedItems.reduce(
+        (total, currentItem) => total + currentItem.totalPrice,
+        0
+      );
+      return { items: updatedItems, totalCartPrice: updatedTotalCartPrice };
+    }),
   updateQuantity: (id: string, quantity: number) =>
-    set((state) => ({
-      items: state.items.map((item) =>
+    set((state) => {
+      const updatedItems = state.items.map((item) =>
         item.id === id
-          ? { ...item, quantity, totalPrice: item.price * quantity } // Perbarui total harga
+          ? { ...item, quantity, totalPrice: item.price * quantity }
           : item
-      ),
-    })),
-  clearCart: () => set({ items: [] }),
+      );
+      const updatedTotalCartPrice = updatedItems.reduce(
+        (total, currentItem) => total + currentItem.totalPrice,
+        0
+      );
+      return { items: updatedItems, totalCartPrice: updatedTotalCartPrice };
+    }),
+  clearCart: () => set({ items: [], totalCartPrice: 0 }),
 }));
 
 export default useCartStore;

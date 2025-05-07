@@ -15,16 +15,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Cursor Tokoku",
+  title: "Rajwa Cilok - Jajanan Kekinian",
   description:
-    "Temukan pengalaman berbelanja yang lebih cepat dan aman dengan teknologi Next.js terbaru! Nikmati kemudahan bertransaksi dan jangan khawatir lagi dengan keamanan yang terjamin.",
-  keywords: ["next.js", "react", "typescript"],
-  authors: [{ name: "Somwan" }],
+    "Nikmati cilok dan aneka jajanan lainnya yang enak, murah, dan bikin nagih! Belanja online di Rajwa Cilok, praktis dan kekinian!",
+  keywords: ["cilok", "jajanan", "makanan ringan", "next.js", "react"],
+  authors: [{ name: "Rajwa Cilok Team" }],
   openGraph: {
-    title: "Rajwa Cilok",
+    title: "Rajwa Cilok - Jajanan Kekinian",
     description:
-      "Temukan pengalaman berbelanja yang lebih cepat dan aman dengan teknologi Next.js terbaru! Nikmati kemudahan bertransaksi dan jangan khawatir lagi dengan keamanan yang terjamin.",
+      "Nikmati cilok dan aneka jajanan lainnya yang enak, murah, dan bikin nagih! Belanja online di Rajwa Cilok, praktis dan kekinian!",
     type: "website",
+  },
+  icons: {
+    icon: "/images/thecilokmini.png",
   },
 };
 

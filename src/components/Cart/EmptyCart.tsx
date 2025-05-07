@@ -8,13 +8,7 @@ const EmptyCart = () => (
         <span className="transcenter text-[1em]">
           <i
             className="fas fa-times text-[2em] text-white"
-            style={{ WebkitTextStroke: "6px white" }}
-          />
-        </span>
-        <span className="transcenter text-[1em]">
-          <i
-            className="fas fa-times text-[2em] text-black"
-            style={{ WebkitTextStroke: "2px black" }}
+            style={{ WebkitTextStroke: "1px white" }}
           />
         </span>
       </div>
