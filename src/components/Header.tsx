@@ -51,9 +51,9 @@ const Header: React.FC = () => {
               </span>
               {/* Lingkaran kecil dengan efek pulse dan jumlah total quantity */}
               {items.length > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 h-5 w-5 bg-orange-400 rounded-lg px-3 flexc text-white text-[10px] font-bold animate-pulseku">
+                <span className="absolute -top-0.5 -right-0.5 h-5 w-5 bg-blue-500 rounded-lg px-3 flexc text-white text-[10px] font-bold animate-pulseku">
                   {items.reduce((total, item) => total + item.quantity, 0)}
-                  <span className="absolute h-[80%] w-[80%] rounded-lg px-1.5 bg-orange-400 opacity-50 animate-pingku"></span>
+                  <span className="absolute h-[80%] w-[80%] rounded-lg px-1.5 bg-blue-500 opacity-50 animate-pingku"></span>
                 </span>
               )}
             </button>

@@ -3,6 +3,7 @@ import Menu from "@/components/Menu";
 import { fetchMenuItems } from "./fetcher/fetchMenuItems";
 import { MenuItemInterface } from "./data/menuItems";
 import { checkIsMobile } from "./utils/checkIsMobile";
+import StoreHours from "./StoreHours";
 
 export default async function Home() {
   const menuItems: Array<MenuItemInterface> = await fetchMenuItems();
@@ -19,9 +20,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-200">
+    <main className="h-screen bg-gray-200">
       <Header />
       <Menu menuItems={menuItems} />
+      <StoreHours />
     </main>
   );
 }

@@ -100,13 +100,13 @@ const MenuItem = ({ item, handleAddToCart }: any) => {
       </div>
 
       <button
-        className="bg-green-500 h-[50px] w-[60px] text-white py-1.5 px-3 rounded-lg hover:bg-green-600 transall clicked flexc font-bold self-end m-5 relative"
+        className="bg-blue-500 h-[50px] w-[60px] text-white py-1.5 px-3 rounded-lg active:bg-blue-600 transall clicked flexc font-bold self-end m-5 relative"
         onClick={(event) => handleAddToCart(event, item)}
       >
         <i className="fas fa-shopping-basket text-[1.5em]" />
         {quantity > 0 && (
           <span
-            className="absolute top-0.5 right-0.5 bg-teal-700 text-white font-bold rounded-md h-4 w-4 px-2 flexc"
+            className="absolute top-0.5 right-0.5 bg-blue-700 text-white font-bold rounded-md h-4 w-4 px-2 flexc"
             style={{
               fontSize: `${Math.max(
                 10 - Math.floor(Math.log10(quantity)) * 2,
