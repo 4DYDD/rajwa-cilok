@@ -5,15 +5,26 @@ import useCartOpenStore from "@/app/hooks/useCartOpenStore";
 import Cart from "./Cart";
 import Image from "next/image";
 import useCartStore from "@/app/hooks/useCartStore";
+import useIsMobile from "@/app/hooks/useIsMobile";
+import { useEffect } from "react";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  isMobile: boolean;
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
   const { isCartOpen, setCartOpen } = useCartOpenStore();
   const { items } = useCartStore();
+  const { isMobile, setIsMobile } = useIsMobile();
 
   const handleButtonClick = (event: any) => {
     event.preventDefault();
     setCartOpen(!isCartOpen);
   };
+
+  useEffect(() => {
+    setIsMobile(props.isMobile);
+  }, [props.isMobile, setIsMobile]);
 
   return (
     <div className="fixed -top-0.5 left-0 w-full bg-white shadow-md z-[99] px-3">

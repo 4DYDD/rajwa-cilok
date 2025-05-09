@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Rajwa Cilok - Jajanan Kekinian",
   description:
-    "Nikmati cilok dan aneka jajanan lainnya yang enak, murah, dan bikin nagih! Belanja online di Rajwa Cilok, praktis dan kekinian!",
+    "Nikmati cilok dan aneka jajanan laiclnnya yang enak, murah, dan bikin nagih! Belanja online di Rajwa Cilok, praktis dan kekinian!",
   keywords: ["cilok", "jajanan", "makanan ringan", "next.js", "react"],
   authors: [{ name: "Rajwa Cilok Team" }],
   openGraph: {

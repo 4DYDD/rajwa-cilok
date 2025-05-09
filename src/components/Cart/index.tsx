@@ -5,13 +5,15 @@ import useCartOpenStore from "@/app/hooks/useCartOpenStore";
 import { useEffect } from "react";
 import CartFooter from "./CartFooter";
 import CartHeader from "./CartHeader";
-import CartItem from "./CartItem";
+import CartList from "./CartList";
 import EmptyCart from "./EmptyCart";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const Cart = () => {
   const { items, totalCartPrice, clearCart, updateQuantity, removeItem } =
     useCartStore();
   const { isCartOpen, setCartOpen } = useCartOpenStore();
+  const { isMobile } = useIsMobile();
 
   const handleCloseCart = () => {
     setCartOpen(false);
@@ -101,32 +103,29 @@ const Cart = () => {
       onClick={handleCloseCart}
     >
       <div
-        className="m-2 rounded-t-xl shadow-md w-96 overflow-hidden bg-white"
+        className="m-2 rounded-t-xl shadow-md w-96 overflow-hidden bg-white flexcc"
         onClick={(e) => e.stopPropagation()}
       >
         <CartHeader handleCloseCart={handleCloseCart} />
 
         {items.length > 0 ? (
-          <ul className="max-h-[450px] overflow-y-auto scrollbar-custom w-full px-3">
-            {items.map((item) => (
-              <CartItem
-                key={item.id}
-                item={item}
-                updateQuantity={updateQuantity}
-                removeItem={removeItem}
-              />
-            ))}
-          </ul>
+          <>
+            <CartList
+              items={items}
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+              isMobile={isMobile}
+            />
+
+            <CartFooter
+              items={items}
+              totalCartPrice={totalCartPrice}
+              clearCart={clearCart}
+              handleOrder={handleOrder}
+            />
+          </>
         ) : (
           <EmptyCart />
-        )}
-        {items.length > 0 && (
-          <CartFooter
-            items={items}
-            totalCartPrice={totalCartPrice}
-            clearCart={clearCart}
-            handleOrder={handleOrder}
-          />
         )}
       </div>
     </div>
