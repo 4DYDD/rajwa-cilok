@@ -1,5 +1,7 @@
 import React from "react";
 import { CartItemInterface } from "@/app/hooks/useCartStore";
+import { showConfirm } from "@/app/hooks/useConfirmStore"; // Import showConfirm
+import { showAlert } from "@/app/hooks/useAlertStore";
 
 interface CartFooterActionsProps {
   items: Array<CartItemInterface>;
@@ -22,11 +24,15 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
     <button
       className="bg-red-500 text-white py-3 px-4 rounded-md shadow text-[16px] flex items-center gap-2 flexc leading-none clicked transall"
       onClick={() => {
-        if (
-          window.confirm("Apakah Anda yakin ingin menghapus semua pesanan?")
-        ) {
-          clearCart();
-        }
+        showConfirm(
+          "Apakah Anda yakin ingin menghapus semua pesanan?",
+          () => {
+            // onConfirm
+            clearCart();
+            showAlert("Semua item dalam keranjang telah **dihapus**!");
+          }
+          // onCancel is not needed here
+        );
       }}
     >
       <span className="size-4 flexc relative">

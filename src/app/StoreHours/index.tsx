@@ -10,6 +10,8 @@ import {
   StoreStatusDetail,
   HideNotificationButton,
 } from "./theindex";
+import { showConfirm } from "../hooks/useConfirmStore";
+import { showAlert } from "../hooks/useAlertStore";
 
 // Komponen utama StoreHours
 const StoreHours = () => {
@@ -52,13 +54,20 @@ const StoreHours = () => {
         <HideNotificationButton
           onClick={(e) => {
             e.stopPropagation();
-            if (
-              window.confirm(
-                "Apakah Anda yakin ingin menyembunyikan notifikasi jam buka/tutup warung?"
-              )
-            ) {
-              setHidden(true);
-            }
+
+            showConfirm(
+              "Apakah Anda yakin ingin menyembunyikan notifikasi jam **buka/tutup** warung?",
+              () => {
+                showAlert(
+                  "Notifikasi jam **buka/tutup** warung disembunyikan."
+                );
+                setHidden(true);
+              },
+              () =>
+                showAlert(
+                  "Notifikasi jam **buka/tutup** warung **batal** disembunyikan."
+                )
+            );
           }}
         />
       )}

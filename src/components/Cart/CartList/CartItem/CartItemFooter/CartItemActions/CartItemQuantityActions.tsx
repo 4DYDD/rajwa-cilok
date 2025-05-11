@@ -1,4 +1,5 @@
-import QuantityField from "@/components/Cart/CartList/CartItem/CartItemFooter/CartItemActions/CartItemQuantityField";
+import QuantityField from "./CartItemQuantityField"; // Updated import path
+import { showConfirm } from "@/app/hooks/useConfirmStore"; // Import showConfirm
 
 const CartItemQuantityActions = ({
   item,
@@ -16,13 +17,14 @@ const CartItemQuantityActions = ({
       <button
         className="bg-red-500 text-white size-[2em] flexc rounded shadow font-bold text-[1em]"
         onClick={() => {
-          if (
-            confirm(
-              "Apakah Anda yakin ingin menghapus item ini dari keranjang?"
-            )
-          ) {
-            removeItem(item.id);
-          }
+          showConfirm(
+            "Apakah Anda yakin ingin menghapus item ini dari keranjang?",
+            () => {
+              // onConfirm
+              removeItem(item.id);
+            }
+            // onCancel is not needed here
+          );
         }}
       >
         <i className="fas fa-trash-alt"></i>

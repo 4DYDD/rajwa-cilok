@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import MyAlert from "./MyAlert"; // Import MyAlert
+import MyConfirm from "./MyConfirm";
+import MyPrompt from "./MyPrompt"; // Impor MyPrompt
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -41,6 +44,9 @@ export default function RootLayout({
       <body
         className={`h-[100vh] ${quicksand.variable} ${quicksand.className}`}
       >
+        <MyAlert /> {/* Tambahkan MyAlert di sini */}
+        <MyConfirm /> {/* Tambahkan CustomConfirm di sini */}
+        <MyPrompt /> {/* Tambahkan MyPrompt di sini */}
         {children}
       </body>
     </html>
