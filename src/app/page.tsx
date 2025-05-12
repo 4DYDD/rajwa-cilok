@@ -27,7 +27,7 @@ export default async function Home() {
       <Header isMobile={isMobile} />
       <Menu menuItems={menuItems} />
       <StoreHours />
-      <TutorialSession />
+      {/* <TutorialSession /> */}
     </main>
   );
 }
