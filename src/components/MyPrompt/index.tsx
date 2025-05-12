@@ -1,8 +1,8 @@
 "use client";
 
+import usePromptStore from "@/app/hooks/usePromptStore";
+import { formatMessage } from "@/app/utils/formatMessage";
 import React, { useState, useEffect } from "react";
-import usePromptStore from "../hooks/usePromptStore";
-import { formatMessage } from "../utils/formatMessage";
 
 const MyPrompt: React.FC = () => {
   const { isOpen, message, defaultValue, onConfirm, onCancel, closePrompt } =
@@ -73,7 +73,7 @@ const MyPrompt: React.FC = () => {
             onClick={handleCancel}
             className="clicked transall bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md text-sm"
           >
-            Batal
+            Kembali
           </button>
           <button
             type="submit" // This button will trigger the form's onSubmit

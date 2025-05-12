@@ -1,10 +1,8 @@
 "use client";
 
+import useAlertStore from "@/app/hooks/useAlertStore";
+import { formatMessage } from "@/app/utils/formatMessage";
 import React from "react";
-import useAlertStore from "../hooks/useAlertStore"; // Path diperbarui
-import {
-  formatMessage, // Menggunakan formatMessage tunggal
-} from "../utils/formatMessage"; // Impor fungsi dari utilitas
 
 const MyAlert: React.FC = () => {
   const { isOpen, message, closeAlert } = useAlertStore();

@@ -33,8 +33,8 @@ const usePromptStore = create<PromptState>((set) => ({
     set({
       isOpen: false,
       message: "",
-      defaultValue: "",
       onConfirm: null,
+      defaultValue: "",
       onCancel: null,
     }),
 }));

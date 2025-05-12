@@ -4,13 +4,15 @@ import { fetchMenuItems } from "./fetcher/fetchMenuItems";
 import { MenuItemInterface } from "./data/menuItems";
 import { checkIsMobile } from "./utils/checkIsMobile";
 import StoreHours from "./StoreHours";
+import TutorialSession from "@/components/TutorialSession";
 // import StoreHours from "./StoreHours";
 
 export default async function Home() {
   const menuItems: Array<MenuItemInterface> = await fetchMenuItems();
 
   // cek, apakah perangkat pengguna adalah mobile
-  const isMobile = await checkIsMobile();
+  // const isMobile = await checkIsMobile();
+  const isMobile = true;
 
   if (!isMobile) {
     return (
@@ -25,6 +27,7 @@ export default async function Home() {
       <Header isMobile={isMobile} />
       <Menu menuItems={menuItems} />
       <StoreHours />
+      <TutorialSession />
     </main>
   );
 }

@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import MyAlert from "./MyAlert"; // Import MyAlert
-import MyConfirm from "./MyConfirm";
-import MyPrompt from "./MyPrompt"; // Impor MyPrompt
+import WhatsAppPermissionPopup from "../components/WhatsAppPermissionPopup"; // Impor WhatsAppPermissionPopup
+import InitializeClientLogic from "./components/InitializeClientLogic"; // Impor InitializeClientLogic
+import MyAlert from "@/components/MyAlert";
+import MyConfirm from "@/components/MyConfirm";
+import MyPrompt from "@/components/MyPrompt";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -44,9 +46,11 @@ export default function RootLayout({
       <body
         className={`h-[100vh] ${quicksand.variable} ${quicksand.className}`}
       >
-        <MyAlert /> {/* Tambahkan MyAlert di sini */}
-        <MyConfirm /> {/* Tambahkan CustomConfirm di sini */}
-        <MyPrompt /> {/* Tambahkan MyPrompt di sini */}
+        <MyAlert />
+        <MyConfirm />
+        <MyPrompt />
+        <WhatsAppPermissionPopup />
+        <InitializeClientLogic />
         {children}
       </body>
     </html>
