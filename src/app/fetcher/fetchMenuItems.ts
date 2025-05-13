@@ -1,4 +1,4 @@
-import { MenuItemInterface } from "../data/menuItems";
+import { MenuItemInterface } from "../interfaces/MenuItem.interface";
 
 /**
  *

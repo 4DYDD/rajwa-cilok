@@ -135,7 +135,6 @@ export const useWhatsAppPermissionStore = create<WhatsAppPermissionState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         isPermissionGranted: state.isPermissionGranted,
-        samting: "alamak cuy",
       }), // Only persist isPermissionGranted
       onRehydrateStorage: () => {
         // This is called when state is rehydrated from storage

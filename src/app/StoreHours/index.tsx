@@ -36,6 +36,7 @@ const StoreHours = () => {
   // Render UI utama
   return (
     <div
+      id="tutorial-highlight-store-hours-section"
       ref={ref}
       className={`fixed bottom-14 right-6 z-50 transall !duration-300 clicked select-none ${
         !expanded && isOpen ? "animate-bounceku" : ""

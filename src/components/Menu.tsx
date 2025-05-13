@@ -3,7 +3,7 @@
 import Image from "next/image";
 import useCartStore from "@/app/hooks/useCartStore";
 import { formatRupiah } from "@/app/utils/formatRupiah";
-import { MenuItemInterface } from "@/app/data/menuItems";
+import { MenuItemInterface } from "@/app/interfaces/MenuItem.interface";
 import { useState } from "react";
 
 const MenuHeader = () => (
@@ -57,14 +57,14 @@ const MenuItem = ({ item, handleAddToCart }: any) => {
   const quantity = cartItem ? cartItem.quantity : 0;
 
   return (
-    <div className="w-full max-w-[340px] rounded-lg overflow-hidden shadow shadow-gray-300 bg-white flex flex-col mx-auto">
-      <div className="size-[340px] relative mb-5 bg-red-500 self-center">
+    <div className="w-full max-w-[340px] rounded-lg overflow-hidden shadow shadow-gray-300 bg-white flex flex-col mx-auto m-2">
+      <div className="size-[340px] relative mb-5 bg-gray-300 self-center">
         {item.image ? (
           <Image
             src={item.image}
             alt={item.name}
-            width={300}
-            height={300}
+            width={800}
+            height={800}
             className="object-cover size-full"
           />
         ) : (
@@ -137,11 +137,12 @@ const MenuGrid = ({
 
   return (
     <div
-      className="bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-4"
+      id="tutorial-highlight-menu-grid"
+      className="bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-4"
       style={{ fontSize: `${textSizeInEm}em` }}
     >
-      {menuItems.map((item) => (
-        <MenuItem key={item.id} item={item} handleAddToCart={handleAddToCart} />
+      {menuItems.map((item, index) => (
+        <MenuItem key={item.id} item={item} handleAddToCart={handleAddToCart} {...(index === 0 && { id: "tutorial-target-menu-item-1" })} />
       ))}
     </div>
   );

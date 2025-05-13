@@ -5,26 +5,15 @@ import useCartOpenStore from "@/app/hooks/useCartOpenStore";
 import Cart from "./Cart";
 import Image from "next/image";
 import useCartStore from "@/app/hooks/useCartStore";
-import useIsMobile from "@/app/hooks/useIsMobile";
-import { useEffect } from "react";
 
-interface HeaderProps {
-  isMobile: boolean;
-}
-
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: React.FC = () => {
   const { isCartOpen, setCartOpen } = useCartOpenStore();
   const { items } = useCartStore();
-  const { setIsMobile } = useIsMobile();
 
   const handleButtonClick = (event: any) => {
     event.preventDefault();
     setCartOpen(!isCartOpen);
   };
-
-  useEffect(() => {
-    setIsMobile(props.isMobile);
-  }, [props.isMobile, setIsMobile]);
 
   return (
     <>
@@ -48,6 +37,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           <ul className="flex items-center space-x-4">
             <li className="rounded-lg overflow-hidden border border-gray-200 relative clicked transall text-gray-700 active:text-black">
               <button
+                id="tutorial-highlight-header-menu-button"
                 type="button"
                 className={`h-[50px] w-[60px] flexc font-semibold p-3 relative`}
                 onClick={handleButtonClick}

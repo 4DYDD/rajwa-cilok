@@ -12,6 +12,24 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "192.168.18.44",
+        port: "3000",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "192.168.18.8",
+        port: "3000",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "rajwa-cilok-api.vercel.app",
+        port: "",
+        pathname: "/**",
+      },
+      {
         protocol: "https",
         hostname: "plus.unsplash.com",
         port: "",

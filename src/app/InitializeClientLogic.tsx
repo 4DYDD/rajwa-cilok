@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { initializeWhatsAppLogic } from "../hooks/useWhatsAppPermissionStore";
+import { initializeWhatsAppLogic } from "./hooks/useWhatsAppPermissionStore";
 
 const InitializeClientLogic: React.FC = () => {
   useEffect(() => {
