@@ -5,13 +5,11 @@ import React from "react";
 // Import custom hook untuk mendapatkan jam buka/tutup
 import { useStoreHoursPanel } from "./StoreHoursFunction/useStoreHoursPanel";
 // Import komponen-komponen utama dari folder ini
-import {
-  StoreStatusIcon,
-  StoreStatusDetail,
-  HideNotificationButton,
-} from "./theindex";
-import { showConfirm } from "../hooks/useConfirmStore";
-import { showAlert } from "../hooks/useAlertStore";
+import StoreStatusIcon from "./StoreStatusIcon"; // Corrected import
+import StoreStatusDetail from "./StoreStatusDetail"; // Corrected import
+import HideNotificationButton from "./HideNotificationButton"; // Corrected import
+import { showConfirm } from "../../app/hooks/useConfirmStore"; // Corrected path
+import { showAlert } from "../../app/hooks/useAlertStore"; // Corrected path
 
 // Komponen utama StoreHours
 const StoreHours = () => {

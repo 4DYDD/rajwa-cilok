@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import useTutorialStore, { TutorialStep } from "./hooks/useTutorialStore";
 
-const InitializeTutorialLogic = () => { // Renamed component
+const InitializeTutorialLogic = () => {
   const { setTutorialSteps, checkInitialTutorialStatus } = useTutorialStore();
 
   useEffect(() => {
@@ -11,25 +11,26 @@ const InitializeTutorialLogic = () => { // Renamed component
       {
         title: "Selamat Datang!",
         text: "Ini adalah menu utama kami. Kamu bisa lihat berbagai pilihan cilok dan minuman.",
+        name: "Menu Utama dari Rajwa Cilok",
         highlightedElementId: "tutorial-highlight-menu-grid",
-        arrow: { direction: "bottom" },
       },
       {
         title: "Pilih Menu",
         text: "Tap pada salah satu item untuk melihat detail atau menambahkannya ke keranjang.",
-        arrow: { direction: "right", targetId: "tutorial-target-menu-item-1" },
+        name: "Cara masukkan Menu ke keranjang lewat tombol bakul biru",
+        highlightedElementId: "tutorial-target-menu-item-1",
       },
       {
-        title: "Jam Buka Toko",
+        title: "Jam Buka Warung",
         text: "Cek jam operasional toko kami di sini ya!",
+        name: "Info tentang Jam Buka Rajwa Cilok",
         highlightedElementId: "tutorial-highlight-store-hours-section",
-        arrow: { direction: "top" },
       },
       {
-        title: "Navigasi",
+        title: "Tombol buka keranjang",
         text: "Gunakan tombol ini untuk membuka keranjangmu, tempat semua pesananmu ditampung sebelum di checkout.",
+        name: "Tombol di pojok kanan atas untuk buka keranjang",
         highlightedElementId: "tutorial-highlight-header-menu-button",
-        arrow: { direction: "right" }, // Changed from "left" to "right"
       },
     ];
 
@@ -37,7 +38,7 @@ const InitializeTutorialLogic = () => { // Renamed component
     checkInitialTutorialStatus();
   }, [setTutorialSteps, checkInitialTutorialStatus]);
 
-  return null; // This component doesn't render anything itself
+  return null;
 };
 
-export default InitializeTutorialLogic; // Renamed export
+export default InitializeTutorialLogic;

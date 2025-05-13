@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { getNextOpenClose } from "../StoreHoursFunction/getNextOpenClose";
 import { getCountdown } from "../StoreHoursFunction/getCountdown";
-import { useStoreHours } from "../../hooks/useStoreHours";
-import { useStoreStatus } from "../../hooks/useStoreStatus";
+import { useStoreHours } from "@/app/hooks/useStoreHours";
+import { useStoreStatus } from "@/app/hooks/useStoreStatus";
 
 export function useStoreHoursPanel() {
   // Ambil jam buka dan tutup dari custom hook

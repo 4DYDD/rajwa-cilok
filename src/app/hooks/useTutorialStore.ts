@@ -5,13 +5,15 @@ export interface TutorialStep {
   elementId?: string;
   title?: string; // Added title
   text: string;
-  // arrowPosition?: "top" | "bottom" | "left" | "right"; // Old version
-  arrow?: { // New more detailed arrow object
-    direction: "top" | "bottom" | "left" | "right" | "none";
-    targetId?: string; // ID of element the arrow points to (optional)
-    customStyles?: React.CSSProperties; // For fine-tuning
-  };
+  name?: string; // Ditambahkan untuk memperjelas fungsi step
+  // arrowPosition?: "top" | "bottom" | "left" | "right"; // Old version - REMOVED
+  // arrow?: { // New more detailed arrow object - REMOVED
+  //   direction: "top" | "bottom" | "left" | "right" | "none";
+  //   targetId?: string; // ID of element the arrow points to (optional)
+  //   customStyles?: React.CSSProperties; // For fine-tuning
+  // };
   highlightedElementId?: string; // ID of the element to highlight for this step
+  // textBoxStyles?: React.CSSProperties; // Old: For custom positioning and styling of the text box
 }
 
 interface TutorialState {
@@ -26,6 +28,7 @@ interface TutorialState {
   setTutorialSteps: (steps: TutorialStep[]) => void;
   resetTutorial: () => void; // To allow re-triggering tutorial for testing or if new features are added
   checkInitialTutorialStatus: () => void; // Added here
+  restartTutorial: () => void; // Added restartTutorial action
 }
 
 const useTutorialStore = create<TutorialState>()(
@@ -72,6 +75,17 @@ const useTutorialStore = create<TutorialState>()(
           showTutorial();
         }
       },
+      // Moved restartTutorial here for correct 'set' and 'get' scope
+      restartTutorial: () => {
+        localStorage.removeItem('tutorial-storage'); // Remove the persisted state to clear permanent skip
+        set({
+          isTutorialVisible: true,
+          currentStepIndex: 0,
+          isTutorialSkippedPermanently: false, // Explicitly set to false
+        });
+        // Re-check initial status to potentially show tutorial if steps are present
+        get().checkInitialTutorialStatus();
+      },
     }),
     {
       name: 'tutorial-storage', // Name of the item in localStorage
@@ -81,6 +95,16 @@ const useTutorialStore = create<TutorialState>()(
         // We don't persist isTutorialVisible or currentStepIndex,
         // so it always starts fresh unless skipped permanently.
       }),
+      // Action to restart the tutorial from the beginning - MOVED INSIDE (set, get)
+      // restartTutorial: () => {
+      //   localStorage.removeItem('tutorial-storage');
+      //   set({
+      //     isTutorialVisible: true,
+      //     currentStepIndex: 0,
+      //     isTutorialSkippedPermanently: false, 
+      //   });
+      //   get().checkInitialTutorialStatus(); 
+      // },
     }
   )
 );

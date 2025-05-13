@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Menu from "@/components/Menu";
 import { fetchMenuItems } from "./fetcher/fetchMenuItems";
 import { MenuItemInterface } from "./interfaces/MenuItem.interface";
-import StoreHours from "./StoreHours";
+import StoreHours from "@/components/StoreHours";
 
 export default async function Home() {
   const menuItems: Array<MenuItemInterface> = await fetchMenuItems();
