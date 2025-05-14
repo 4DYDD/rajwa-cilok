@@ -22,7 +22,7 @@ const InitializeTutorialLogic = () => {
       },
       {
         title: "Jam Buka Warung",
-        text: "Cek jam operasional toko kami di sini ya! Warung kami buka setiap hari kecuali hari Senin.",
+        text: "Cek jam operasional toko kami di sini ya! Warung kami buka setiap hari **kecuali hari Senin**.",
         name: "storeHours",
         highlightedElementId: "tutorial-highlight-store-hours-section",
       },

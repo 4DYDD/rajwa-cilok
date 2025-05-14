@@ -19,7 +19,7 @@ const WelcomeStep: React.FC<StepContentProps> = ({
   const handleSkipPermanently = () => {
     if (showConfirm) {
       showConfirm(
-        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu Pengaturan.",
+        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu **Jam Buka Warung**.",
         () => {
           skipPermanently();
         },
@@ -27,7 +27,7 @@ const WelcomeStep: React.FC<StepContentProps> = ({
           console.log("Batal melewati tutorial secara permanen.");
         },
         {
-          confirmButtonText: "Ya, Jangan Tampilkan Lagi",
+          confirmButtonText: "Ya, Nonaktifkan",
           cancelButtonText: "Batal",
           confirmButtonColor: "bg-gray-500 active:bg-gray-600",
         }
@@ -37,7 +37,7 @@ const WelcomeStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center !top-[18%] text-[0.9rem]`}
+      className={`${defaultClasses} flex flex-col items-center !top-[18%] text-[0.9rem] animate-squish`}
     >
       <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
         <>

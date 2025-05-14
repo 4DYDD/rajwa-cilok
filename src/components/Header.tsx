@@ -1,18 +1,31 @@
 "use client";
 
+import React, { useEffect, useRef, useState } from "react"; // Added useEffect
+import Image from "next/image";
 import Link from "next/link";
+import useCartStore from "@/app/hooks/useCartStore";
 import useCartOpenStore from "@/app/hooks/useCartOpenStore";
 import Cart from "./Cart";
-import Image from "next/image";
-import useCartStore from "@/app/hooks/useCartStore";
-import { useEffect, useState, useRef } from "react";
 import useTutorialStore from "@/app/hooks/useTutorialStore";
+import useIsMobile from "@/app/hooks/useIsMobile"; // Import useIsMobile
 
-const Header: React.FC = () => {
+// Define props interface for Header
+interface HeaderProps {
+  initialIsMobile: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ initialIsMobile }) => {
+  // Update to use HeaderProps
   const { isCartOpen, setCartOpen } = useCartOpenStore();
   const { items } = useCartStore();
   const { isTutorialVisible, tutorialSteps, currentStepIndex } =
     useTutorialStore();
+  const { setIsMobile } = useIsMobile(); // Get setIsMobile from useIsMobile
+
+  // Effect to set initial mobile status from prop
+  useEffect(() => {
+    setIsMobile(initialIsMobile);
+  }, [initialIsMobile, setIsMobile]);
 
   const [duplicateButtonProps, setDuplicateButtonProps] = useState({
     top: 0,

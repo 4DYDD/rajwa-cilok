@@ -28,7 +28,7 @@ const CartStep: React.FC<StepContentProps> = ({
           console.log("Batal melewati tutorial secara permanen.");
         },
         {
-          confirmButtonText: "Ya, Jangan Tampilkan Lagi",
+          confirmButtonText: "Ya, Nonaktifkan Tutorial",
           cancelButtonText: "Batal",
           confirmButtonColor: "bg-gray-500 active:bg-gray-600",
         }
@@ -46,7 +46,7 @@ const CartStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center space-y-2 text-[0.9rem] !top-[30%]`}
+      className={`${defaultClasses} flex flex-col items-center space-y-2 text-[0.9rem] !top-[30%] animate-squish`}
     >
       <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
         <i className={`fas fa-shopping-basket`} />

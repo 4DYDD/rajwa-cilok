@@ -24,7 +24,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
           console.log("Batal melewati tutorial secara permanen.");
         },
         {
-          confirmButtonText: "Ya, Jangan Tampilkan Lagi",
+          confirmButtonText: "Ya, Nonaktifkan Tutorial",
           cancelButtonText: "Batal",
           confirmButtonColor: "bg-gray-500 hover:bg-gray-600",
         }
@@ -38,7 +38,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center space-y-2.5 text-[0.9rem]`}
+      className={`${defaultClasses} flex flex-col items-center space-y-2.5 !top-[65%] text-[0.9rem] animate-squish`}
     >
       {currentStep.title && (
         <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">

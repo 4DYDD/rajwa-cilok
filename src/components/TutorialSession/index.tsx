@@ -7,6 +7,7 @@ import WelcomeStep from "./TutorialSessionStep/WelcomeStep";
 import CartStep from "./TutorialSessionStep/CartStep";
 import StoreHoursStep from "./TutorialSessionStep/StoreHoursStep";
 import type { StepContentProps } from "@/app/interfaces/StepContentProps.interface";
+import useIsMobile from "@/app/hooks/useIsMobile"; // Import useIsMobile
 
 const TutorialSession: React.FC = () => {
   const {
@@ -19,6 +20,7 @@ const TutorialSession: React.FC = () => {
     skipPermanently,
   } = useTutorialStore();
   const { showConfirm } = useConfirmStore();
+  const { isMobile } = useIsMobile(); // Get isMobile state
 
   const currentStep = tutorialSteps[currentStepIndex];
 
@@ -81,7 +83,10 @@ const TutorialSession: React.FC = () => {
 
     if (isVisible) {
       document.body.style.overflow = "hidden";
-      document.body.style.height = "92vh";
+      if (isMobile) {
+        // Only change height if on mobile
+        document.body.style.height = "92vh";
+      }
     } else {
       document.body.style.overflow = "";
       document.body.style.height = "100vh";
@@ -92,6 +97,7 @@ const TutorialSession: React.FC = () => {
       return () => {
         // Cleanup specific to this condition
         document.body.style.overflow = "";
+        document.body.style.height = "100vh";
       };
     }
 
@@ -137,8 +143,12 @@ const TutorialSession: React.FC = () => {
       if (document.body.style.overflow === "hidden") {
         document.body.style.overflow = "";
       }
+      if (isMobile && document.body.style.height === "92vh") {
+        // Ensure height is reset if it was changed for mobile
+        document.body.style.height = "100vh";
+      }
     };
-  }, [isVisible, currentStep, tutorialSteps]); // tutorialSteps was part of dependencies
+  }, [isVisible, currentStep, tutorialSteps, isMobile]); // Added isMobile to dependencies
 
   const handleOverlayClick = () => {
     if (currentStepIndex < tutorialSteps.length - 1) {

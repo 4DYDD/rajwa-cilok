@@ -11,13 +11,15 @@ const TerlarisLabel: React.FC = () => (
     className="ps-2.5 pe-10 py-1 text-[0.5em] bg-orange-500 font-bold gap-1 flexc"
     style={{ color: "white", WebkitTextStroke: "0.2px white" }}
   >
-    <span className="block size-3.5 flexc leading-none">
+    <span className="block size-3.5 flexc leading-none mr-1">
       <i
         style={{ WebkitTextStroke: "1px white" }}
-        className="leading-none fas fa-fire text-transparent text-[1.5em]"
+        className="leading-none fas fa-fire text-transparent text-[1.7em]"
       />
     </span>
-    <span className="leading-none uppercase">terlaris</span>
+    <div className="leading-none flexcc !items-start uppercase py-1.5">
+      <span>terlaris</span>
+    </div>
   </span>
 );
 
@@ -26,15 +28,16 @@ const FreeOngkirLabel: React.FC = () => (
     className="ps-2.5 pe-6 py-1 text-[0.5em] bg-green-600 font-bold gap-1 flexc"
     style={{ color: "white", WebkitTextStroke: "0.2px white" }}
   >
-    <span className="block size-3.5 flexc leading-none">
+    <span className="block size-3.5 flexc leading-none mr-1">
       <i
         style={{ WebkitTextStroke: "0.9px white" }}
-        className="leading-none fas fa-truck text-transparent text-[1.3em]"
+        className="leading-none fas fa-truck text-transparent text-[1.5em]"
       />
     </span>
-    <span className="leading-none uppercase">
-      <span className="leading-none">gratis ongkir</span>
-    </span>
+    <div className="leading-none flexcc !items-start space-y-1 uppercase py-1">
+      <span>gratis ongkir</span>
+      <span className="normal-case">(Grand Purnama 2 dan sekitarnya)</span>
+    </div>
   </span>
 );
 

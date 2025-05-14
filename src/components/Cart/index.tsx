@@ -23,16 +23,24 @@ const Cart = () => {
   useEffect(() => {
     if (isCartOpen) {
       document.body.classList.add("overflow-hidden");
-      document.body.style.height = "92vh";
+      if (isMobile) {
+        document.body.style.height = "92vh";
+      }
     } else {
       document.body.classList.remove("overflow-hidden");
-      document.body.style.height = "100vh";
+      if (isMobile) {
+        document.body.style.height = "100vh";
+      }
     }
 
     return () => {
       document.body.classList.remove("overflow-hidden");
+      // Ensure height is reset if it was potentially changed for mobile
+      if (isMobile) {
+        document.body.style.height = "100vh";
+      }
     };
-  }, [isCartOpen]);
+  }, [isCartOpen, isMobile]); // Added isMobile to dependencies
 
   if (!isCartOpen) return null;
 

@@ -9,7 +9,6 @@ import StoreStatusIcon from "./StoreStatusIcon"; // Corrected import
 import StoreStatusDetail from "./StoreStatusDetail"; // Corrected import
 import HideNotificationButton from "./HideNotificationButton"; // Corrected import
 import { showConfirm } from "../../app/hooks/useConfirmStore"; // Corrected path
-import { showAlert } from "../../app/hooks/useAlertStore"; // Corrected path
 
 // Komponen utama StoreHours
 const StoreHours = () => {
@@ -57,15 +56,9 @@ const StoreHours = () => {
             showConfirm(
               "Apakah Anda yakin ingin menyembunyikan notifikasi jam **buka/tutup** warung?",
               () => {
-                showAlert(
-                  "Notifikasi jam **buka/tutup** warung disembunyikan."
-                );
                 setHidden(true);
               },
-              () =>
-                showAlert(
-                  "Notifikasi jam **buka/tutup** warung **batal** disembunyikan."
-                )
+              () => {}
             );
           }}
         />
