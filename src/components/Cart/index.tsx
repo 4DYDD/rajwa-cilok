@@ -23,8 +23,10 @@ const Cart = () => {
   useEffect(() => {
     if (isCartOpen) {
       document.body.classList.add("overflow-hidden");
+      document.body.style.height = "92vh";
     } else {
       document.body.classList.remove("overflow-hidden");
+      document.body.style.height = "100vh";
     }
 
     return () => {

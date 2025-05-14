@@ -1,22 +1,26 @@
-import React from "react";
+import React from "react"; // Removed useState
+// import { showConfirm } from "@/app/hooks/useConfirmStore"; // Dihapus karena sudah dari props
 import type { StepContentProps } from "@/app/interfaces/StepContentProps.interface";
 import { formatMessage } from "@/app/utils/formatMessage";
 
-const StoreHoursStep: React.FC<StepContentProps> = ({
+const CartStep: React.FC<StepContentProps> = ({
   currentStep,
   currentStepIndex,
   defaultClasses,
   nextStep,
   prevStep,
   skipPermanently,
-  showConfirm,
   isLastStep,
+  showConfirm,
   hideTutorial,
 }) => {
+  // Removed useState for clickedButton
+  // Removed handleButtonClick function
+
   const handleSkipPermanently = () => {
     if (showConfirm) {
       showConfirm(
-        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu Status Warung.",
+        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu Pengaturan.",
         () => {
           skipPermanently();
         },
@@ -26,38 +30,42 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
         {
           confirmButtonText: "Ya, Jangan Tampilkan Lagi",
           cancelButtonText: "Batal",
-          confirmButtonColor: "bg-gray-500 hover:bg-gray-600",
+          confirmButtonColor: "bg-gray-500 active:bg-gray-600",
         }
       );
     }
   };
 
   const handleNextOrFinish = () => {
-    nextStep();
+    if (isLastStep) {
+      nextStep();
+    } else {
+      nextStep();
+    }
   };
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center space-y-2.5 text-[0.9rem]`}
+      className={`${defaultClasses} flex flex-col items-center space-y-2 text-[0.9rem] !top-[30%]`}
     >
-      {currentStep.title && (
-        <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
-          <i className="fas fa-clock"></i>
-          <span className="mx-2.5 leading-none">{currentStep.title}</span>
-          <i className="fas fa-clock"></i>
-        </h2>
-      )}
+      <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
+        <i className={`fas fa-shopping-basket`} />
+        <span className="mx-2.5 leading-none">
+          {currentStep.title || "Keranjang Belanja"}
+        </span>
+        <i className={`fas fa-shopping-basket`} />
+      </h2>
       <div className="text-[0.9em] text-gray-600 text-left w-full font-semibold mb-2">
         {formatMessage(currentStep.text)}
       </div>
 
       {/* Button Container */}
-      <div className="flex flex-col items-center w-full space-y-2 font-bold text-[1em] !select-none">
+      <div className="flex flex-col items-center w-full space-y-2.5 font-bold text-[1em] !select-none">
         {/* Top row for Kembali and Lanjut/Selesai */}
         <div className="flex justify-center space-x-2 w-full mb-4 text-[1em]">
           {currentStepIndex > 0 && (
             <button
-              id="prevButtonStoreHours"
+              id="prevButtonCart"
               onClick={prevStep} // Directly call prevStep
               className="px-3 py-1.5 rounded-md flex items-center justify-center transition-all duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-1 bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-400 clicked transall text-[0.8em] flex-1" // Ubah warna background dan text, Tambah flex-1
             >
@@ -65,7 +73,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
             </button>
           )}
           <button
-            id="nextButtonStoreHours"
+            id="nextButtonCart"
             onClick={handleNextOrFinish} // Directly call handleNextOrFinish
             className="px-3 py-1.5 rounded-md flex items-center justify-center transition-all duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-1 bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-400 clicked transall text-[0.8em] flex-1" // Tambah flex-1
           >
@@ -84,7 +92,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
         {/* Middle row for Skip Tutorial */}
         <div className="flex justify-center w-full">
           <button
-            id="skipSessionButtonStoreHours"
+            id="skipSessionButtonCart"
             onClick={hideTutorial} // Directly call hideTutorial
             className="px-3 py-1.5 rounded-md flex items-center justify-center transition-all duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-1 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400 clicked transall text-[0.8em]"
           >
@@ -95,7 +103,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
         {/* Bottom row for Nonaktifkan Tutorial */}
         <div className="flex justify-center w-full">
           <button
-            id="skipButtonStoreHours"
+            id="skipButtonCart"
             onClick={handleSkipPermanently} // Directly call handleSkipPermanently
             className="px-3 py-1.5 rounded-md flex items-center justify-center transition-all duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-1 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400 clicked transall text-[0.8em]"
           >
@@ -107,4 +115,4 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
   );
 };
 
-export default StoreHoursStep;
+export default CartStep;

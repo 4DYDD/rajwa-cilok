@@ -7,7 +7,7 @@ import { MenuItemInterface } from "@/app/interfaces/MenuItem.interface";
 import { useState } from "react";
 
 const MenuHeader = () => (
-  <header className="mt-20 pt-5 mb-5 relative">
+  <header className="pt-5 mb-5 relative">
     <div className="flexc relative">
       <Image
         alt={`cilok`}
@@ -142,7 +142,12 @@ const MenuGrid = ({
       style={{ fontSize: `${textSizeInEm}em` }}
     >
       {menuItems.map((item, index) => (
-        <MenuItem key={item.id} item={item} handleAddToCart={handleAddToCart} {...(index === 0 && { id: "tutorial-target-menu-item-1" })} />
+        <MenuItem
+          key={item.id}
+          item={item}
+          handleAddToCart={handleAddToCart}
+          {...(index === 0 && { id: "tutorial-target-menu-item-1" })}
+        />
       ))}
     </div>
   );
@@ -225,6 +230,7 @@ const Menu = ({ menuItems }: { menuItems: Array<MenuItemInterface> }) => {
 
   return (
     <>
+      <div className="w-full h-1 pt-[76px]" />
       <MenuHeader />
       <MenuGrid menuItems={menuItems} handleAddToCart={handleAddToCart} />
       <Footer />

@@ -8,7 +8,7 @@ export default async function Home() {
   const menuItems: Array<MenuItemInterface> = await fetchMenuItems();
 
   return (
-    <main className="h-screen bg-gray-200">
+    <main className="bg-gray-200">
       <Header />
       <Menu menuItems={menuItems} />
       <StoreHours />

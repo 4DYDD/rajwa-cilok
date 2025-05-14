@@ -40,14 +40,34 @@ export const applyBoldFormatting = (segments: Segment[]): Segment[] => {
 };
 
 /**
- * Placeholder untuk menerapkan format miring.
- * Untuk saat ini, hanya mengembalikan segmen apa adanya.
+ * Menerapkan format miring ke segmen berdasarkan delimiter '*' (asterisk tunggal).
+ * Mempertahankan gaya lain yang sudah ada pada segmen.
  * @param segments Array dari Segmen.
- * @returns Array baru dari Segmen (di masa mendatang, dengan format miring diterapkan).
+ * @returns Array baru dari Segmen dengan format miring diterapkan.
  */
 export const applyItalicFormatting = (segments: Segment[]): Segment[] => {
-  // TODO: Implementasikan logika format miring di sini, mis., memisahkan dengan '*' atau '_'.
-  return segments;
+  return segments.flatMap((segment) => {
+    // Jika status miring sudah ditentukan untuk segmen ini, jangan proses ulang untuk miring.
+    if (segment.isItalic !== undefined) {
+      return [segment];
+    }
+    // Gunakan regex untuk memisahkan dengan * tetapi hindari **
+    // Pola: cocokkan * yang tidak diikuti oleh * dan tidak didahului oleh *
+    // Ini lebih rumit dari yang diharapkan karena kita perlu menangani ** vs *
+    // Untuk kesederhanaan awal, kita akan memisahkan dengan * tunggal dan mengasumsikan tidak ada tumpang tindih langsung dengan **
+    // Jika ada **italic** maka akan jadi <strong><em>italic</em></strong>
+    // Jika ada *bold*** maka akan jadi <em>bold</em>*
+    // Ini adalah pendekatan yang disederhanakan. Parsing yang lebih kuat mungkin diperlukan untuk kasus yang kompleks.
+
+    const parts = segment.text.split("*");
+    return parts
+      .map((part, index) => ({
+        ...segment, // Pertahankan gaya lain seperti isBold
+        text: part,
+        isItalic: index % 2 === 1, // Teks di antara '*' menjadi miring
+      }))
+      .filter((s) => s.text.length > 0); // Hapus segmen kosong
+  });
 };
 
 /**
@@ -58,16 +78,29 @@ export const applyItalicFormatting = (segments: Segment[]): Segment[] => {
 export const renderFormattedSegments = (
   segments: Segment[]
 ): React.ReactNode[] => {
-  return segments.map((segment, index) => {
-    let content: React.ReactNode = segment.text;
-    // Terapkan gaya - urutan mungkin penting untuk penumpukan, mis., miring di dalam tebal
-    if (segment.isItalic) {
-      content = <em key={`italic-${index}`}>{content}</em>;
-    }
-    if (segment.isBold) {
-      content = <strong key={`bold-${index}`}>{content}</strong>;
-    }
-    return content;
+  return segments.flatMap((segment, segmentIndex) => {
+    const lines = segment.text.split("\n");
+    const lineNodes = lines.flatMap((line, lineIndex) => {
+      let content: React.ReactNode = line;
+      // Terapkan gaya - urutan mungkin penting untuk penumpukan, mis., miring di dalam tebal
+      if (segment.isItalic) {
+        content = (
+          <em key={`italic-${segmentIndex}-${lineIndex}`}>{content}</em>
+        );
+      }
+      if (segment.isBold) {
+        content = (
+          <strong key={`bold-${segmentIndex}-${lineIndex}`}>{content}</strong>
+        );
+      }
+
+      if (lineIndex < lines.length - 1) {
+        // Jika ini bukan bagian baris terakhir dari segmen saat ini, tambahkan <br />
+        return [content, <br key={`br-${segmentIndex}-${lineIndex}`} />];
+      }
+      return [content]; // Bagian baris terakhir, atau jika tidak ada \n
+    });
+    return lineNodes;
   });
 };
 

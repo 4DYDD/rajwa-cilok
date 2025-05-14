@@ -1,15 +1,22 @@
 import type { TutorialStep } from "@/app/hooks/useTutorialStore";
-import type React from 'react';
 
 export interface StepContentProps {
   currentStep: TutorialStep;
-  commonBoxProps: {
-    ref: React.RefObject<HTMLDivElement | null>;
-    onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-  };
-  defaultClasses: string;
+  currentStepIndex: number;
+  defaultClasses: string; // Ditambahkan kembali
   nextStep: () => void;
+  prevStep: () => void;
   hideTutorial: () => void;
   skipPermanently: () => void;
   isLastStep: boolean;
+  showConfirm?: (
+    message: string,
+    onConfirm: () => void,
+    onCancel?: () => void,
+    options?: {
+      confirmButtonText?: string;
+      cancelButtonText?: string;
+      confirmButtonColor?: string;
+    }
+  ) => void;
 }

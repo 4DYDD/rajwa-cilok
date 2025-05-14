@@ -28,7 +28,7 @@ const MyAlert: React.FC = () => {
         </div>
         <button
           onClick={closeAlert}
-          className="clicked transall w-full flexc gap-2 text-[0.8em] py-2.5 px-2.5 rounded-lg text-sm bg-blue-500 hover:bg-blue-600 text-white font-bold focus:outline-none focus:shadow-outline"
+          className="clicked transall w-full flexc gap-2 text-[0.8em] py-2.5 px-2.5 rounded-lg text-sm bg-blue-500 hover:bg-blue-600 text-white font-bold focus:outline-none focus:shadow-outline !select-none"
         >
           <i className="fas fa-arrow-down animate-bounce"></i>
           {/* Icon untuk tombol tutup */}

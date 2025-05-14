@@ -24,6 +24,7 @@ interface TutorialState {
   showTutorial: () => void;
   hideTutorial: () => void;
   nextStep: () => void;
+  prevStep: () => void; // Ditambahkan prevStep
   skipPermanently: () => void;
   setTutorialSteps: (steps: TutorialStep[]) => void;
   resetTutorial: () => void; // To allow re-triggering tutorial for testing or if new features are added
@@ -53,6 +54,13 @@ const useTutorialStore = create<TutorialState>()(
           hideTutorial(); // Hide tutorial after the last step
         }
       },
+      // Ditambahkan implementasi prevStep
+      prevStep: () => {
+        const { currentStepIndex } = get();
+        if (currentStepIndex > 0) {
+          set({ currentStepIndex: currentStepIndex - 1 });
+        }
+      },
       skipPermanently: () => {
         set({ isTutorialVisible: false, isTutorialSkippedPermanently: true });
       },
@@ -79,12 +87,14 @@ const useTutorialStore = create<TutorialState>()(
       restartTutorial: () => {
         localStorage.removeItem('tutorial-storage'); // Remove the persisted state to clear permanent skip
         set({
-          isTutorialVisible: true,
+          // isTutorialVisible: true, // REMOVED: Do not show before reload
           currentStepIndex: 0,
           isTutorialSkippedPermanently: false, // Explicitly set to false
         });
-        // Re-check initial status to potentially show tutorial if steps are present
-        get().checkInitialTutorialStatus();
+        // Reload the page to ensure a fresh start and scroll to top
+        window.location.reload();
+        // After reload, InitializeTutorialLogic will call checkInitialTutorialStatus,
+        // which will then call showTutorial if conditions are met.
       },
     }),
     {

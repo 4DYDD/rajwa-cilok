@@ -133,11 +133,19 @@ body {
 .transcenter-r {
   @apply absolute -translate-x-1/2 -translate-y-1/2 right-1/2 top-1/2;
 }
+.transcenter-b {
+  @apply absolute -translate-x-1/2 translate-y-1/2 left-1/2 bottom-1/2;
+}
+.transcenter-b-r {
+  @apply absolute translate-x-1/2 translate-y-1/2 right-1/2 bottom-1/2;
+}
 .transall {
   @apply transition-all duration-100 ease-in-out;
 }
 .clicked {
-  @apply cursor-pointer active:scale-90;
+  @apply cursor-pointer active:scale-90 transform;
+  /* Menambahkan properti transform dasar agar active:scale-90 berfungsi */
+  /* transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); */ /* Baris ini dihapus */
 }
 
 @keyframes pingku {

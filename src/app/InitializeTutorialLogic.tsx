@@ -10,27 +10,21 @@ const InitializeTutorialLogic = () => {
     const steps: TutorialStep[] = [
       {
         title: "Selamat Datang!",
-        text: "Ini adalah menu utama kami. Kamu bisa lihat berbagai pilihan cilok dan minuman.",
-        name: "Menu Utama dari Rajwa Cilok",
+        text: "Ini adalah menu utama kami. Kamu bisa lihat berbagai pilihan cilok yang enak.",
+        name: "welcome",
         highlightedElementId: "tutorial-highlight-menu-grid",
       },
       {
-        title: "Pilih Menu",
-        text: "Tap pada salah satu item untuk melihat detail atau menambahkannya ke keranjang.",
-        name: "Cara masukkan Menu ke keranjang lewat tombol bakul biru",
-        highlightedElementId: "tutorial-target-menu-item-1",
+        title: "Tombol Buka Keranjang",
+        text: "Gunakan tombol ini untuk membuka keranjangmu, tempat semua pesananmu ditampung sebelum di checkout.",
+        name: "cart",
+        highlightedElementId: "tutorial-highlight-header-menu-button",
       },
       {
         title: "Jam Buka Warung",
-        text: "Cek jam operasional toko kami di sini ya!",
-        name: "Info tentang Jam Buka Rajwa Cilok",
+        text: "Cek jam operasional toko kami di sini ya! Warung kami buka setiap hari kecuali hari Senin.",
+        name: "storeHours",
         highlightedElementId: "tutorial-highlight-store-hours-section",
-      },
-      {
-        title: "Tombol buka keranjang",
-        text: "Gunakan tombol ini untuk membuka keranjangmu, tempat semua pesananmu ditampung sebelum di checkout.",
-        name: "Tombol di pojok kanan atas untuk buka keranjang",
-        highlightedElementId: "tutorial-highlight-header-menu-button",
       },
     ];
 

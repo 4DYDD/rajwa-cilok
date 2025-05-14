@@ -67,7 +67,7 @@ const MyPrompt: React.FC = () => {
             }
           }}
         />
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-end gap-3 !select-none">
           <button
             type="button" // Explicitly set type to prevent form submission if not intended
             onClick={handleCancel}

@@ -36,12 +36,12 @@ const StoreHours = () => {
     <div
       id="tutorial-highlight-store-hours-section"
       ref={ref}
-      className={`fixed bottom-14 right-6 z-50 transall !duration-300 clicked select-none ${
+      className={`!fixed transcenter-b-r z-50 transall !duration-300 clicked select-none ${
         !expanded && isOpen ? "animate-bounceku" : ""
       } ${
         expanded
-          ? "w-80 px-6 h-32 rounded-lg"
-          : "w-14 px-0 h-14 !justify-center rounded-full"
+          ? "!bottom-32 w-[340px] px-6 h-48 rounded-lg" // Width reverted to w-80, height remains h-40
+          : "!bottom-20 !right-14 w-14 px-0 h-14 !justify-center rounded-full"
       } bg-white shadow-xl flexc group overflow-hidden`}
       style={{
         boxShadow: "0 4px 24px 0 rgba(0,0,0,0.10)",

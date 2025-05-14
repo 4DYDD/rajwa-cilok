@@ -70,7 +70,7 @@ const MyConfirm: React.FC = () => {
         <div className="text-gray-800 text-sm mb-4 whitespace-pre-wrap break-words font-medium">
           {formatMessage(message)}
         </div>
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end space-x-3 !select-none">
           <button onClick={handleCancel} className={cancelButtonClasses}>
             <i className="fas fa-times mr-2"></i>
             {cancelButtonText || "Batal"}
