@@ -33,31 +33,43 @@ const StoreHours = () => {
   // Jika disembunyikan, tidak render apapun
   if (hidden) return null;
 
+  // Menentukan kelas dinamis berdasarkan state
+  let dynamicContainerClasses = "";
+  if (expanded) {
+    if (!isMobile) {
+      // Expanded state on Desktop
+      dynamicContainerClasses =
+        "w-[400px] !right-[50%] !bottom-[75%] h-66 px-6 rounded-lg text-[1.2em]";
+    } else {
+      // Expanded state on Mobile
+      dynamicContainerClasses =
+        "w-[340px] !bottom-40 !right-[50%] h-60 px-6 rounded-lg text-[1em]";
+    }
+  } else {
+    if (!isMobile) {
+      dynamicContainerClasses = "!right-40 !bottom-32";
+    } else {
+      dynamicContainerClasses = "clicked";
+    }
+  }
+
+  const bounceAnimationClass = !expanded && isOpen ? "animate-bounceku" : "";
+
   // Render UI utama
   return (
     <div
       id="tutorial-highlight-store-hours-section"
       ref={ref}
-      className={`!fixed transcenter-b-r z-50 transall !duration-300 ${
-        !expanded && isOpen ? "animate-bounceku" : ""
-      } ${
-        expanded || !isMobile
-          ? (!isMobile
-              ? "w-[400px] !right-[1710px] !bottom-[820px] h-40"
-              : "w-[340px] !bottom-32 h-48") + " px-6 rounded-lg" // Width reverted to w-80, height remains h-40
-          : "!bottom-20 !right-14 w-14 px-0 h-14 !justify-center rounded-full"
-      } bg-white shadow-xl flexc group overflow-hidden`}
+      className={`!fixed z-50 transall !duration-300 text-[0em] transcenter-b-r !bottom-16 !right-12 w-14 h-14 rounded-full flexc group overflow-hidden ${bounceAnimationClass} ${dynamicContainerClasses} bg-white shadow-xl`}
       style={{
         boxShadow: "0 4px 24px 0 rgba(0,0,0,0.10)",
       }}
       onClick={() => {
-        // Jika dalam mode mobile, toggle expanded state
-        // clicked select-none
-        if (isMobile && !expanded) setExpanded((e) => !e);
+        if (!expanded) setExpanded((e) => !e); // Toggle expanded state
       }}
     >
       {/* Tombol untuk menyembunyikan notifikasi */}
-      {(expanded || !isMobile) && (
+      {expanded && (
         <HideNotificationButton
           onClick={(e) => {
             e.stopPropagation();
@@ -75,7 +87,7 @@ const StoreHours = () => {
       {/* Ikon status buka/tutup */}
       <StoreStatusIcon isOpen={isOpen} expanded={expanded} />
       {/* Detail status buka/tutup */}
-      {(expanded || !isMobile) && (
+      {expanded && (
         <StoreStatusDetail
           isOpen={isOpen}
           openHour={openHour}
@@ -83,7 +95,6 @@ const StoreHours = () => {
           closeHour={closeHour}
           closeMinute={closeMinute}
           countdown={countdown}
-          expanded={expanded}
         />
       )}
     </div>

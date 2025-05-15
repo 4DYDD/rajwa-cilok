@@ -42,7 +42,7 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
   return (
     <div
       className={`${defaultClasses} flex flex-col items-center space-y-2.5 ${
-        !isMobile ? "!top-[20.3%] !left-[34%]" : "!top-[65%]"
+        !isMobile ? "!top-[78.5%] !left-[76.5%]" : "!top-[65%]"
       } text-[0.9rem] animate-squish`}
     >
       {currentStep.title && (

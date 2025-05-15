@@ -47,7 +47,8 @@ export function useStoreHoursPanel() {
 
   // Tutup panel jika klik di luar komponen saat expanded
   useEffect(() => {
-    if (!expanded || !isMobile) return;
+    if (!expanded) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         setExpanded(false);

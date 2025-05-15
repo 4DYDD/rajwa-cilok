@@ -12,16 +12,16 @@ const StoreStatusIcon = ({
 
   return (
     <div
-      className={`flexc transall !duration-300 
-      ${!isMobile ? "text-[0.9em]" : "text-[0.8em]"} 
+      className={`flexc transall !duration-300 select-none
       ${isOpen ? "bg-green-400" : "bg-red-400"}`}
       style={{
-        width: expanded || !isMobile ? (!isMobile ? 70 : 56) : 40,
-        height: expanded || !isMobile ? (!isMobile ? 70 : 56) : 40,
-        minWidth: expanded || !isMobile ? (!isMobile ? 70 : 56) : 40,
-        minHeight: expanded || !isMobile ? (!isMobile ? 70 : 56) : 40,
+        width: expanded ? (!isMobile ? 70 : 56) : 40,
+        height: expanded ? (!isMobile ? 70 : 56) : 40,
+        minWidth: expanded ? (!isMobile ? 70 : 56) : 40,
+        minHeight: expanded ? (!isMobile ? 70 : 56) : 40,
+        fontSize: expanded ? "0.85em" : "0.7rem",
         borderRadius: "50%",
-        marginRight: expanded || !isMobile ? 16 : 0,
+        marginRight: expanded ? 16 : 0,
       }}
     >
       <span className="text-white font-bold text-[1em]">

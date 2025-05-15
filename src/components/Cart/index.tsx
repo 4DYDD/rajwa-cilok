@@ -50,7 +50,7 @@ const Cart = () => {
       onClick={handleCloseCart}
     >
       <div
-        className={`m-2 rounded-t-xl shadow-md
+        className={`m-2 rounded-t-xl shadow-md animate-squish
           ${!isMobile ? "w-[1850px]" : "w-[384px]"} 
           overflow-hidden bg-white flexcc`}
         onClick={(e) => e.stopPropagation()}

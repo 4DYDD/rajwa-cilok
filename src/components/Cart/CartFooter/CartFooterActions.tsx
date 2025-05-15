@@ -46,7 +46,7 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
   return (
     <div
       className={`flexc ${
-        !isMobile ? "!justify-start" : "!justify-between"
+        !isMobile ? "!justify-start gap-3" : "!justify-between"
       } font-bold w-full ${isOpen ? "p-2" : "p-1 gap-2"}`}
     >
       {/* TOMBOL HAPUS SEMUA ITEM DI KERANJANG */}
@@ -84,7 +84,7 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
         onClick={() => {
           if (!isOpen) {
             showAlert(
-              "Mohon maaf, warung sedang tutup. Silakan kembali saat jam operasional."
+              "Mohon maaf, warung sedang tutup. Silahkan kembali saat jam operasional."
             );
             return;
           }
