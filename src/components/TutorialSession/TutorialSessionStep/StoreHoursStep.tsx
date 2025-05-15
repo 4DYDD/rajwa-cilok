@@ -1,6 +1,7 @@
 import React from "react";
 import type { StepContentProps } from "@/app/interfaces/StepContentProps.interface";
 import { formatMessage } from "@/app/utils/formatMessage";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const StoreHoursStep: React.FC<StepContentProps> = ({
   currentStep,
@@ -13,10 +14,12 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
   isLastStep,
   hideTutorial,
 }) => {
+  const { isMobile } = useIsMobile();
+
   const handleSkipPermanently = () => {
     if (showConfirm) {
       showConfirm(
-        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu Status Warung.",
+        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu **Jam Buka Warung**.",
         () => {
           skipPermanently();
         },
@@ -38,7 +41,9 @@ const StoreHoursStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center space-y-2.5 !top-[65%] text-[0.9rem] animate-squish`}
+      className={`${defaultClasses} flex flex-col items-center space-y-2.5 ${
+        !isMobile ? "!top-[20.3%] !left-[34%]" : "!top-[65%]"
+      } text-[0.9rem] animate-squish`}
     >
       {currentStep.title && (
         <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">

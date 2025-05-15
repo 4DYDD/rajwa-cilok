@@ -6,12 +6,14 @@ import CartItemActions from "./CartItemActions/index";
 
 interface CartItemFooterProps {
   item: CartItemInterface;
+  isMobile: boolean;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
 }
 
 const CartItemFooter: React.FC<CartItemFooterProps> = ({
   item,
+  isMobile,
   updateQuantity,
   removeItem,
 }) => {
@@ -19,9 +21,19 @@ const CartItemFooter: React.FC<CartItemFooterProps> = ({
     <>
       <div className="flexcc w-full !items-start py-1 px-2 gap-5">
         {/* HARGA ITEM DAN SUBTOTALNYA */}
-        <div className="flex flex-col">
-          <CartItemPrice item={item} />
-          <CartItemSubtotal item={item} />
+        <div className={`flex flex-col`}>
+          <CartItemPrice
+            className={`
+            ${!isMobile && "w-[300px]"}
+            `}
+            item={item}
+          />
+          <CartItemSubtotal
+            className={`
+            ${!isMobile && "w-[300px]"}
+            `}
+            item={item}
+          />
         </div>
 
         {/* TOMBOL MANIPULASI ITEM DI KERANJANG */}

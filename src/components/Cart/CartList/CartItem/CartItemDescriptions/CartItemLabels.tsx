@@ -46,7 +46,7 @@ const CartItemLabels: React.FC<CartItemLabelsProps> = ({
   className = "",
 }) => (
   <div
-    className={`text-[16px] h-full w-full min-h-[30px] font-bold truncate flexcc !items-start !justify-start gap-1 ${className}`}
+    className={`text-[1em] h-full w-full min-h-[30px] font-bold truncate flexcc !items-start !justify-start gap-1 ${className}`}
   >
     <span>
       {item.name.length > 20 ? `${item.name.slice(0, 20)}...` : item.name}

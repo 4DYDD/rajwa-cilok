@@ -2,6 +2,7 @@ import React from "react"; // Removed useState
 // import { showConfirm } from "@/app/hooks/useConfirmStore"; // Dihapus karena sudah dari props
 import type { StepContentProps } from "@/app/interfaces/StepContentProps.interface";
 import { formatMessage } from "@/app/utils/formatMessage";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const CartStep: React.FC<StepContentProps> = ({
   currentStep,
@@ -14,13 +15,12 @@ const CartStep: React.FC<StepContentProps> = ({
   showConfirm,
   hideTutorial,
 }) => {
-  // Removed useState for clickedButton
-  // Removed handleButtonClick function
+  const { isMobile } = useIsMobile();
 
   const handleSkipPermanently = () => {
     if (showConfirm) {
       showConfirm(
-        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu Pengaturan.",
+        "Apakah Anda yakin tidak ingin melihat tutorial ini lagi? Anda dapat menampilkannya kembali dari menu **Jam Buka Warung**.",
         () => {
           skipPermanently();
         },
@@ -46,7 +46,9 @@ const CartStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center space-y-2 text-[0.9rem] !top-[30%] animate-squish`}
+      className={`${defaultClasses} flex flex-col items-center space-y-2 text-[0.9rem] ${
+        !isMobile ? "!top-[12.7%] !left-[73.5%]" : "!top-[30%]"
+      } animate-squish`}
     >
       <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
         <i className={`fas fa-shopping-basket`} />

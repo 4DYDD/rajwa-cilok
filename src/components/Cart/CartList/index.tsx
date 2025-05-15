@@ -16,9 +16,12 @@ const CartList: React.FC<CartListProps> = ({
   isMobile,
 }) => (
   <ul
-    className={`max-h-[45vh] overflow-y-auto ${
-      !isMobile && "scrollbar-custom"
-    } w-full px-3`}
+    className={`overflow-y-auto 
+      ${isMobile && "max-h-[45vh]"} 
+      ${!isMobile && "max-h-[80vh]"} 
+      ${!isMobile && "grid grid-cols-4 !justify-start"} 
+      ${!isMobile && "scrollbar-custom"}
+        w-full px-3`}
   >
     {items.map((item) => (
       <CartItem

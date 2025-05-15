@@ -12,10 +12,10 @@ const CartItemQuantityActions = ({
   removeItem: (id: string) => void;
   className?: string;
 }) => (
-  <div className={`flex items-center gap-1 text-[13px] ${className}`}>
+  <div className={`flex items-center gap-1 text-[0.85em] ${className}`}>
     {item.quantity <= 1 ? (
       <button
-        className="bg-red-500 text-white size-[2em] flexc rounded shadow font-bold text-[1em]"
+        className="bg-red-500 text-white size-[2em] flexc rounded shadow font-bold text-[1em] clicked transall hover:scale-105 select-none"
         onClick={() => {
           showConfirm(
             "Apakah Anda yakin ingin menghapus item ini dari keranjang?",
@@ -31,7 +31,7 @@ const CartItemQuantityActions = ({
       </button>
     ) : (
       <button
-        className="bg-gray-900 text-white size-[2em] flexc rounded shadow font-bold text-[1em]"
+        className="bg-gray-900 text-white size-[2em] flexc rounded shadow font-bold text-[1em] clicked transall hover:scale-105 select-none"
         onClick={() => updateQuantity(item.id, item.quantity - 1)}
       >
         -
@@ -39,7 +39,7 @@ const CartItemQuantityActions = ({
     )}
 
     <QuantityField
-      className="w-[40px] h-[2em] flexc font-bold text-[1em]"
+      className="w-[3.5em] h-[2em] flexc font-bold text-[1em]"
       itemId={item.id}
       quantity={item.quantity}
       updateQuantity={updateQuantity}
@@ -47,7 +47,7 @@ const CartItemQuantityActions = ({
     />
 
     <button
-      className="bg-gray-900 text-white size-[2em] flexc rounded shadow font-bold text-[1em]"
+      className="bg-gray-900 text-white size-[2em] flexc rounded shadow font-bold text-[1em] clicked transall hover:scale-105 select-none"
       onClick={() => updateQuantity(item.id, item.quantity + 1)}
     >
       +

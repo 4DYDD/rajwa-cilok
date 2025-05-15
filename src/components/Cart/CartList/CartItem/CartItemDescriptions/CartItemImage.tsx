@@ -13,7 +13,7 @@ const CartItemImage: React.FC<CartItemImageProps> = ({
 }) => (
   <div className={`p-1 flexc !items-start ${className}`}>
     <div
-      className={`rounded-md overflow-hidden size-[120px] bg-gray-500
+      className={`rounded-md overflow-hidden size-[7.5em] bg-gray-500
       ${item.ongkir === "free" && "outline-green-600 outline-3"}
       ${item.category === "terlaris" && "outline-orange-500 outline-3"}`}
     >

@@ -3,6 +3,7 @@ import { getNextOpenClose } from "../StoreHoursFunction/getNextOpenClose";
 import { getCountdown } from "../StoreHoursFunction/getCountdown";
 import { useStoreHours } from "@/app/hooks/useStoreHours";
 import { useStoreStatus } from "@/app/hooks/useStoreStatus";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 export function useStoreHoursPanel() {
   // Ambil jam buka dan tutup dari custom hook
@@ -20,6 +21,8 @@ export function useStoreHoursPanel() {
   );
   // State untuk menyembunyikan notifikasi
   const [hidden, setHidden] = useState(false);
+
+  const { isMobile } = useIsMobile();
 
   // Update status dan countdown setiap detik
   useEffect(() => {
@@ -44,7 +47,7 @@ export function useStoreHoursPanel() {
 
   // Tutup panel jika klik di luar komponen saat expanded
   useEffect(() => {
-    if (!expanded) return;
+    if (!expanded || !isMobile) return;
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         setExpanded(false);
@@ -52,7 +55,7 @@ export function useStoreHoursPanel() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [expanded]);
+  }, [expanded, isMobile]);
 
   return {
     openHour,

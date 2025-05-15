@@ -1,5 +1,6 @@
 import React from "react";
 import useTutorialStore from "../../app/hooks/useTutorialStore"; // Import useTutorialStore
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const StoreStatusDetail = ({
   isOpen,
@@ -29,6 +30,8 @@ const StoreStatusDetail = ({
   const today = new Date();
   const isMonday = today.getDay() === 1; // 0 for Sunday, 1 for Monday
 
+  const { isMobile } = useIsMobile();
+
   return (
     <div className="ml-2 flex flex-col overflow-hidden w-full relative py-2 h-full">
       {" "}
@@ -36,7 +39,7 @@ const StoreStatusDetail = ({
       <span
         className={`leading-none font-bold text-gray-800 text-base mb-1 py-1.5 truncate opacity-0 ${
           // Changed text-sm to text-xs
-          expanded && "!opacity-100"
+          (expanded || !isMobile) && "!opacity-100"
         }`} // Kept py-1.5 as per original
       >
         {isOpen ? (
@@ -77,12 +80,12 @@ const StoreStatusDetail = ({
         </tbody>
       </table>
       {isMonday ? (
-        <span className="text-[12px] text-red-600 font-semibold leading-tight break-words whitespace-normal mb-2">
+        <span className="text-[12px] text-red-600 leading-tight break-words whitespace-normal mb-2 font-semibold">
           Mohon maaf, hari ini (Senin) warung tutup. Buka kembali besok pukul{" "}
           {formatTime(openHour, openMinute)} WIB.
         </span>
       ) : (
-        <span className="text-[12px] text-gray-500 leading-tight break-words whitespace-normal mb-2">
+        <span className="text-[12px] text-gray-500 leading-tight break-words whitespace-normal mb-2 font-semibold">
           {" "}
           {/* Changed text-xs to text-[11px] */}
           {isOpen
@@ -94,13 +97,13 @@ const StoreStatusDetail = ({
         </span>
       )}
       {/* Tombol untuk menampilkan lagi tutorialnya */}
-      {expanded && (
+      {(expanded || !isMobile) && (
         <button
           onClick={(e) => {
             e.stopPropagation(); // Prevent StoreHours panel from closing
             restartTutorial();
           }}
-          className="ms-1 mb-2 clicked transall mt-auto flex items-center justify-center text-xs font-bold text-blue-700 bg-blue-100 active:bg-blue-200 active:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded-md py-2 px-4 self-start group"
+          className="ms-1 mb-2 clicked transall mt-auto flex items-center justify-center text-xs font-bold text-blue-700 bg-blue-100 active:bg-blue-200 active:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded-md py-2 px-4 self-start group !select-none"
           title="Ulangi Tutorial"
         >
           <i className="fas fa-redo mr-1.5 transition-transform duration-150 ease-in-out group-hover:scale-110"></i>

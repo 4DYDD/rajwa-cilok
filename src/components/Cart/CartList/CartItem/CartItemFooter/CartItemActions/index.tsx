@@ -11,18 +11,20 @@ const CartItemActions = ({
   item: CartItemInterface;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
-}) => (
-  <div className="w-full flexc !justify-between">
-    {/* Tombol Remove Actions */}
-    <CartItemRemoveActions item={item} removeItem={removeItem} />
+}) => {
+  return (
+    <div className={`w-full flexc !justify-between`}>
+      {/* Tombol Remove Actions */}
+      <CartItemRemoveActions item={item} removeItem={removeItem} />
 
-    {/* Tombol Quantity Actions */}
-    <CartItemQuantityActions
-      item={item}
-      updateQuantity={updateQuantity}
-      removeItem={removeItem}
-    />
-  </div>
-);
+      {/* Tombol Quantity Actions */}
+      <CartItemQuantityActions
+        item={item}
+        updateQuantity={updateQuantity}
+        removeItem={removeItem}
+      />
+    </div>
+  );
+};
 
 export default CartItemActions;

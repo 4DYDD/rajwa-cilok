@@ -6,7 +6,7 @@ interface IsMobileState {
 }
 
 const useIsMobile = create<IsMobileState>((set) => ({
-  isMobile: false,
+  isMobile: true,
   setIsMobile: (value: boolean) => set({ isMobile: value }),
 }));
 

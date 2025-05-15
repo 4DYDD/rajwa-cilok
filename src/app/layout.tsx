@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/thecilokmini.png",
+    icon: "/images/rajwa-cilok-logo.svg",
   },
 };
 

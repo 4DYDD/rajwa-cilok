@@ -9,11 +9,16 @@ const CartItemSubtotal = ({
   item: CartItemInterface;
   className?: string;
 }) => (
-  <div className={`flexc text-[0.9em] font-bold ${className}`}>
-    <span className="w-[60px]">Subtotal</span>
-    <span className="w-[10px] text-center mx-1">:</span>
-    <span className="text-gray-600">{formatRupiah(item.totalPrice)}</span>
-    <span className="text-[0.8em] text-gray-400 ml-2 w-[100px]">
+  <div className={`flexc !justify-start text-[0.9em] font-bold ${className}`}>
+    <span className="w-[4em]">Subtotal</span>
+    <span className="w-[2em] text-center">:</span>
+    <span className="text-gray-600 text-[1em]">
+      <span className="text-[0.75em] mr-0.5">Rp</span>
+      <span className="text-[1em]">
+        {formatRupiah(item.price).split("Rp")[1].trim()}
+      </span>
+    </span>
+    <span className="text-[0.8em] text-gray-400 ml-2 w-[10em]">
       {`(${item.price} x ${item.quantity})`}
     </span>
   </div>

@@ -2,6 +2,7 @@
 import React from "react"; // Removed useState
 import type { StepContentProps } from "@/app/interfaces/StepContentProps.interface";
 import { formatMessage } from "@/app/utils/formatMessage";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const WelcomeStep: React.FC<StepContentProps> = ({
   currentStep,
@@ -15,6 +16,8 @@ const WelcomeStep: React.FC<StepContentProps> = ({
 }) => {
   // Removed useState for clickedButton
   // Removed handleButtonClick function
+
+  const { isMobile } = useIsMobile();
 
   const handleSkipPermanently = () => {
     if (showConfirm) {
@@ -37,7 +40,9 @@ const WelcomeStep: React.FC<StepContentProps> = ({
 
   return (
     <div
-      className={`${defaultClasses} flex flex-col items-center !top-[18%] text-[0.9rem] animate-squish`}
+      className={`${defaultClasses} flex flex-col items-center ${
+        !isMobile ? "!top-[12.5%]" : "!top-[18%]"
+      } text-[0.9rem] animate-squish`}
     >
       <h2 className="text-[1.2em] font-bold text-gray-800 mb-1">
         <>

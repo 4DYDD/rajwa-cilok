@@ -9,6 +9,7 @@ import StoreStatusIcon from "./StoreStatusIcon"; // Corrected import
 import StoreStatusDetail from "./StoreStatusDetail"; // Corrected import
 import HideNotificationButton from "./HideNotificationButton"; // Corrected import
 import { showConfirm } from "../../app/hooks/useConfirmStore"; // Corrected path
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 // Komponen utama StoreHours
 const StoreHours = () => {
@@ -27,6 +28,8 @@ const StoreHours = () => {
     setHidden,
   } = useStoreHoursPanel();
 
+  const { isMobile } = useIsMobile();
+
   // Jika disembunyikan, tidak render apapun
   if (hidden) return null;
 
@@ -35,20 +38,26 @@ const StoreHours = () => {
     <div
       id="tutorial-highlight-store-hours-section"
       ref={ref}
-      className={`!fixed transcenter-b-r z-50 transall !duration-300 clicked select-none ${
+      className={`!fixed transcenter-b-r z-50 transall !duration-300 ${
         !expanded && isOpen ? "animate-bounceku" : ""
       } ${
-        expanded
-          ? "!bottom-32 w-[340px] px-6 h-48 rounded-lg" // Width reverted to w-80, height remains h-40
+        expanded || !isMobile
+          ? (!isMobile
+              ? "w-[400px] !right-[1710px] !bottom-[820px] h-40"
+              : "w-[340px] !bottom-32 h-48") + " px-6 rounded-lg" // Width reverted to w-80, height remains h-40
           : "!bottom-20 !right-14 w-14 px-0 h-14 !justify-center rounded-full"
       } bg-white shadow-xl flexc group overflow-hidden`}
       style={{
         boxShadow: "0 4px 24px 0 rgba(0,0,0,0.10)",
       }}
-      onClick={() => setExpanded((e) => !e)}
+      onClick={() => {
+        // Jika dalam mode mobile, toggle expanded state
+        // clicked select-none
+        if (isMobile && !expanded) setExpanded((e) => !e);
+      }}
     >
       {/* Tombol untuk menyembunyikan notifikasi */}
-      {expanded && (
+      {(expanded || !isMobile) && (
         <HideNotificationButton
           onClick={(e) => {
             e.stopPropagation();
@@ -66,7 +75,7 @@ const StoreHours = () => {
       {/* Ikon status buka/tutup */}
       <StoreStatusIcon isOpen={isOpen} expanded={expanded} />
       {/* Detail status buka/tutup */}
-      {expanded && (
+      {(expanded || !isMobile) && (
         <StoreStatusDetail
           isOpen={isOpen}
           openHour={openHour}

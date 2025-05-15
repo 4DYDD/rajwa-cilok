@@ -10,7 +10,7 @@ const InitializeTutorialLogic = () => {
     const steps: TutorialStep[] = [
       {
         title: "Selamat Datang!",
-        text: "Ini adalah menu utama kami. Kamu bisa lihat berbagai pilihan cilok yang enak.",
+        text: "Ini adalah menu utama kami. Kamu bisa lihat berbagai pilihan Cilok yang enak.",
         name: "welcome",
         highlightedElementId: "tutorial-highlight-menu-grid",
       },
@@ -22,7 +22,7 @@ const InitializeTutorialLogic = () => {
       },
       {
         title: "Jam Buka Warung",
-        text: "Cek jam operasional toko kami di sini ya! Warung kami buka setiap hari **kecuali hari Senin**.",
+        text: "Cek jam operasional warung kami di sini ya! Warung kami buka setiap hari **kecuali hari Senin**.",
         name: "storeHours",
         highlightedElementId: "tutorial-highlight-store-hours-section",
       },

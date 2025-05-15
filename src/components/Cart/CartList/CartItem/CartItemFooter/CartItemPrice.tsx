@@ -9,10 +9,17 @@ const CartItemPrice = ({
   item: CartItemInterface;
   className?: string;
 }) => (
-  <div className={`flex text-[0.8em] text-gray-400 ${className}`}>
-    <span className="w-[60px]">Harga</span>
-    <span className="w-[10px] text-center mx-1">:</span>
-    <span>{formatRupiah(item.price)}</span>
+  <div
+    className={`flexc !justify-start text-[0.9em] text-gray-400 ${className}`}
+  >
+    <span className="w-[4em]">Harga</span>
+    <span className="w-[2em] text-center">:</span>
+    <span className="text-[1em]">
+      <span className="text-[0.75em] mr-0.5">Rp</span>
+      <span className="text-[1em]">
+        {formatRupiah(item.price).split("Rp")[1].trim()}
+      </span>
+    </span>
   </div>
 );
 

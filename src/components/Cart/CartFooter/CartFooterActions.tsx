@@ -4,6 +4,7 @@ import { showConfirm } from "@/app/hooks/useConfirmStore";
 import { showAlert } from "@/app/hooks/useAlertStore";
 import { useStoreStatus } from "@/app/hooks/useStoreStatus";
 import { getCountdown } from "../../StoreHours/StoreHoursFunction/getCountdown"; // Import getCountdown
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 interface CartFooterActionsProps {
   items: Array<CartItemInterface>;
@@ -24,6 +25,8 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
   const { isOpen, nextOpen } = useStoreStatus(); // Get store status and nextOpen
   const [countdownLabel, setCountdownLabel] = useState<string>("");
 
+  const { isMobile } = useIsMobile();
+
   useEffect(() => {
     if (!isOpen && nextOpen) {
       const updateCountdown = () => {
@@ -42,13 +45,15 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
 
   return (
     <div
-      className={`flexc !justify-between font-bold w-full ${
-        isOpen ? "p-2" : "p-1 gap-2"
-      }`}
+      className={`flexc ${
+        !isMobile ? "!justify-start" : "!justify-between"
+      } font-bold w-full ${isOpen ? "p-2" : "p-1 gap-2"}`}
     >
       {/* TOMBOL HAPUS SEMUA ITEM DI KERANJANG */}
       <button
-        className={` bg-red-500 text-white py-3 px-4 rounded-md shadow text-[16px] flex items-center gap-2 flexc leading-none clicked transall`}
+        className={` bg-red-500 text-white px-4 rounded-md shadow ${
+          !isMobile ? "text-[1.15em] py-4" : "text-[1em] py-3"
+        }  flex items-center gap-2 flexc leading-none clicked transall`}
         onClick={() => {
           showConfirm(
             "Apakah Anda yakin ingin menghapus semua pesanan?",
@@ -69,7 +74,9 @@ const CartFooterActions: React.FC<CartFooterActionsProps> = ({
 
       {/* TOMBOL KIRIM PESANAN KE WHATSAPP ADMIN */}
       <button
-        className={`text-white py-3 px-4 rounded-md shadow text-[16px] flex items-center gap-2 flexc leading-none transall ${
+        className={`text-white px-4 rounded-md shadow max-w-[175px] ${
+          !isMobile ? "text-[1.3em] py-4" : "text-[1em] py-3"
+        }  flex items-center gap-2 flexc leading-none transall ${
           !isOpen
             ? "bg-gray-400 opacity-70 cursor-not-allowed flex-1"
             : "bg-green-600 clicked"
